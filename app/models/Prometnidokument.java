@@ -2,7 +2,7 @@
 package models;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -25,10 +25,6 @@ import play.db.jpa.Model;
 @Entity
 public class Prometnidokument extends Model{
 
-
-    @Column(nullable = false)
-    public Integer id;
-    
     @Column(nullable = false)
     public String vrstaDokumenta;
     
@@ -37,27 +33,30 @@ public class Prometnidokument extends Model{
     
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
+   
     public Date datumFormiranja;
     @Column(name = "datumKnjizenja")
+    
     @Temporal(TemporalType.DATE)
     public Date datumKnjizenja;
     
     @Column(nullable = false)
     public Character statusDokumenta;
-    @JoinColumn(name = "magacin", referencedColumnName = "id")
+    
     @ManyToOne(optional = false)
     public Magacin magacin;
-    @JoinColumn(name = "poslovniPartner", referencedColumnName = "id")
     @ManyToOne(optional = false)
     public Poslovnipartner poslovniPartner;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prometniDokument")
-    public Collection<Stavkadokumenta> stavkadokumentaCollection;
-    public Prometnidokument(Integer id, String vrstaDokumenta, int redniBrojDokumenta, Date datumFormiranja, Date datumKnjizenja, Character statusDokumenta) {
-        this.id = id;
+    @OneToMany(mappedBy = "prometniDokument")
+    public List<Stavkadokumenta> stavkadokumentaList;
+ 
+    public Prometnidokument(String vrstaDokumenta, int redniBrojDokumenta, Date datumFormiranja, Date datumKnjizenja, Character statusDokumenta, Magacin magacin, Poslovnipartner poslovnipartner) {
         this.vrstaDokumenta = vrstaDokumenta;
         this.redniBrojDokumenta = redniBrojDokumenta;
         this.datumFormiranja = datumFormiranja;
         this.datumKnjizenja = datumKnjizenja;
         this.statusDokumenta = statusDokumenta;
+        this.magacin = magacin;
+        this.poslovniPartner = poslovnipartner;
     }
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import models.Poslovnagodina;
-
+import models.Preduzece;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -19,25 +19,25 @@ public class Poslovnegodine extends Controller {
 		render(poslovnagodina);
 	}
 	
-	public static void create(Integer id, Date godina, boolean zakljucena){
-		Poslovnagodina pg = new Poslovnagodina(Integer.parseInt(id.toString()), godina, zakljucena);
+	public static void create(Date godina, boolean zakljucena, Preduzece preduzece){
+		Poslovnagodina pg = new Poslovnagodina(godina, zakljucena, preduzece);
 		pg.save();
 		
 		read();
 	}
 
 	
-	public static void update(Integer id, Date godina, boolean zakljucena){
+	public static void update(Long id, Date godina, boolean zakljucena, Preduzece preduzece){
 			Poslovnagodina pg = Poslovnagodina.findById(id);
-			pg.id = Integer.parseInt(id.toString());
 			pg.godina = godina;
 			pg.zakljucena = zakljucena;
 			pg.save();
+			pg.preduzece = preduzece;
 			
 			read();
 	}
 	
-	public static void delete (Integer id){
+	public static void delete (Long id){
 		Poslovnagodina pg = Poslovnagodina.findById(id);
 		pg.delete();
 		

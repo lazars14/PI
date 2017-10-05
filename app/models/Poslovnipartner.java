@@ -2,6 +2,8 @@ package models;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,8 +23,7 @@ import play.db.jpa.Model;
 @Entity
 public class Poslovnipartner extends Model {
 	
-    @Column(nullable = false)
-    public Integer id;
+	
     @Column(nullable = false)
     public String tipPartnera;
     @Column(nullable = false)
@@ -31,19 +32,18 @@ public class Poslovnipartner extends Model {
     public String pib;
     @Column(nullable = false)
     public String adresa;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "poslovniPartner")
-    public Collection<Prometnidokument> prometnidokumentCollection;
-    @JoinColumn(name = "preduzece", referencedColumnName = "id")
+    @OneToMany(mappedBy = "poslovniPartner")
+    public List<Prometnidokument> prometnidokumentCollection;
     @ManyToOne(optional = false)
     public Preduzece preduzece;
-    @JoinColumn(name = "mesto", referencedColumnName = "id")
+ 
     @ManyToOne(optional = false)
     public Mesto mesto;
-    public Poslovnipartner(Integer id, String tipPartnera, String nazivPartnera, String pib, String adresa) {
-        this.id = id;
+    public Poslovnipartner(String tipPartnera, String nazivPartnera, String pib, String adresa, Preduzece preduzece) {
         this.tipPartnera = tipPartnera;
         this.nazivPartnera = nazivPartnera;
         this.pib = pib;
         this.adresa = adresa;
+        this.preduzece = preduzece;
     }   
 }

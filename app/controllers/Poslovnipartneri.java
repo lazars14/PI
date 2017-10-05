@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import models.Poslovnipartner;
+import models.Preduzece;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -15,27 +16,27 @@ public class Poslovnipartneri extends Controller {
 		render(poslovnipartneri);
 	}
 	
-	public static void create(Integer id, String tipPartnera , String nazivPartnera, String pib, String adresa){
-		Poslovnipartner pp = new Poslovnipartner(Integer.parseInt(id.toString()), tipPartnera, nazivPartnera, pib, adresa);
+	public static void create(String tipPartnera, String nazivPartnera, String pib, String adresa, Preduzece preduzece){
+		Poslovnipartner pp = new Poslovnipartner(tipPartnera, nazivPartnera, pib, adresa, preduzece);
 		pp.save();
 		
 		read();
 	}
 
 	
-	public static void update(Integer id, String tipPartnera , String nazivPartnera, String pib, String adresa){
+	public static void update(Long id, String tipPartnera , String nazivPartnera, String pib, String adresa, Preduzece preduzece){
 			Poslovnipartner pp = Poslovnipartner.findById(id);
-			pp.id = Integer.parseInt(id.toString());
 			pp.tipPartnera = tipPartnera;
 			pp.nazivPartnera = nazivPartnera;
 			pp.pib = pib;
 			pp.adresa = adresa;
+			pp.preduzece = preduzece;
 			pp.save();
 			
 			read();
 	}
 	
-	public static void delete (Integer id){
+	public static void delete (Long id){
 		Poslovnipartner pp = Poslovnipartner.findById(id);
 		pp.delete();
 		

@@ -2,7 +2,7 @@
 package models;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,10 +21,6 @@ import play.db.jpa.Model;
 
 @Entity
 public class Preduzece extends Model {
-
-	
-    @Column(nullable = false)
-    public Integer id;
     
     @Column(nullable = false)
     public String naziv;
@@ -34,24 +30,25 @@ public class Preduzece extends Model {
     
     @Column(nullable = false)
     public String adresa;
-    @JoinColumn(name = "mesto", referencedColumnName = "id")
+    
     @ManyToOne(optional = false)
     public Mesto mesto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "preduzece")
-    public Collection<Poslovnagodina> poslovnagodinaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "preduzece")
-    public Collection<Gruparoba> gruparobaCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "preduzece")
-    public Collection<Poslovnipartner> poslovnipartnerCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "preduzece")
-    public Collection<Radnik> radnikCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "preduzece")
-    public Collection<Magacin> magacinCollection;
-    public Preduzece(Integer id, String naziv, String pib, String adresa) {
-        this.id = id;
+    @OneToMany(mappedBy = "preduzece")
+    public List<Poslovnagodina> poslovnagodinaList;
+    @OneToMany(mappedBy = "preduzece")
+    public List<Gruparoba> gruparobaList;
+    @OneToMany(mappedBy = "preduzece")
+    public List<Poslovnipartner> poslovnipartnerList;
+    @OneToMany(mappedBy = "preduzece")
+    public List<Radnik> radnikList;
+    @OneToMany(mappedBy = "preduzece")
+    public List<Magacin> magacinList;
+    
+    public Preduzece(String naziv, String pib, String adresa, Mesto mesto) {
         this.naziv = naziv;
         this.pib = pib;
         this.adresa = adresa;
+        this.mesto = mesto;
     }
 
     

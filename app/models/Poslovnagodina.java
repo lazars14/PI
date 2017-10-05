@@ -8,6 +8,8 @@ package models;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,9 +30,6 @@ import play.db.jpa.Model;
 @Entity
 public class Poslovnagodina extends Model {
 
-
-    @Column(nullable = false)
-    public Integer id;
     @Column(nullable = false)
     public Date godina;
     @Column(name = "zakljucena")
@@ -39,12 +38,12 @@ public class Poslovnagodina extends Model {
     @ManyToOne(optional = false)
     public Preduzece preduzece;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "poslovnaGodina")
-    public Collection<Robnakartica> robnakarticaCollection;    
+    @OneToMany(mappedBy = "poslovnaGodina")
+    public List<Robnakartica> robnakarticaCollection;    
 
-    public Poslovnagodina(Integer id, Date godina, boolean zakljucena) {
-        this.id = id;
+    public Poslovnagodina(Date godina, boolean zakljucena, Preduzece preduzece) {
         this.godina = godina;
         this.zakljucena = zakljucena;
+        this.preduzece = preduzece;
     }  
 }
