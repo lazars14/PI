@@ -46,7 +46,8 @@ public class Robnakartica extends Model{
     @ManyToOne(optional = false)
     public Roba roba;
 
-    public Robnakartica(BigDecimal cena, int pocStanjeKol, BigDecimal pocStanjeVrednosti, int prometUlazaKol, BigDecimal prometUlazaVr, int prometIzlazaKol, BigDecimal prometIzlazaVr, int ukKol, BigDecimal ukVrednost, Poslovnagodina poslovnagodina, Magacin magacin, Roba roba) {
+    public Robnakartica(BigDecimal cena, int pocStanjeKol, BigDecimal pocStanjeVrednosti, int prometUlazaKol, BigDecimal prometUlazaVr, int prometIzlazaKol,
+    					BigDecimal prometIzlazaVr, int ukKol, BigDecimal ukVrednost, Poslovnagodina poslovnagodina, Magacin magacin, Roba roba) {
         this.cena = cena;
         this.pocStanjeKol = pocStanjeKol;
         this.pocStanjeVrednosti = pocStanjeVrednosti;

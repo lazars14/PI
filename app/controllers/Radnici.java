@@ -17,23 +17,25 @@ public class Radnici extends Controller{
 		render(radnici);
 	}
 	
-	public static void create(Integer id, String ime, String prezime, String jmbg, String adresa, String radnoMesto) {
+	public static void create(String ime, String prezime, String jmbg, String adresa, String radnoMesto, String korisnickoIme, String lozinka, Preduzece preduzece) {
 		
-		Radnik r = new Radnik(Integer.parseInt(id.toString()), ime, prezime, jmbg, adresa, radnoMesto);
+		Radnik r = new Radnik(ime, prezime, jmbg, adresa, radnoMesto, korisnickoIme, lozinka, preduzece);
 		r.save();
 		
 		read();
 	}
 	
-	public static void update(Integer id, String ime, String prezime, String jmbg, String adresa, String radnoMesto) {
+	public static void update(Long id, String ime, String prezime, String jmbg, String adresa, String radnoMesto, String korisnickoIme, String lozinka, Preduzece preduzece) {
 		
 		Radnik r = Radnik.findById(id);
-		r.id = Integer.parseInt(id.toString());
 		r.ime = ime;
 		r.prezime = prezime;
 		r.jmbg = jmbg;
 		r.adresa = adresa;
 		r.radnoMesto = radnoMesto;
+		r.korisnickoIme = korisnickoIme;
+		r.lozinka = lozinka;
+		r.preduzece = preduzece;
 		r.save();
 		
 		read();

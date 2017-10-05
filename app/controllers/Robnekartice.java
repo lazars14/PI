@@ -23,26 +23,17 @@ public class Robnekartice extends Controller{
     	render(robneKartice);
 	}
 
-	public static void create(Integer id, BigDecimal cena, int pocStanjeKol, BigDecimal pocStanjeVrednosti, int prometUlazaKol, BigDecimal prometUlazaVr, int prometIzlazaKol, BigDecimal prometIzlazaVr, int ukKol, BigDecimal ukVrednost) {
+	public static void create(BigDecimal cena, int pocStanjeKol, BigDecimal pocStanjeVrednosti, int prometUlazaKol, BigDecimal prometUlazaVr, int prometIzlazaKol,
+								BigDecimal prometIzlazaVr, int ukKol, BigDecimal ukVrednost, Poslovnagodina poslovnagodina, Magacin magacin, Roba roba) {
 		
-		Robnakartica robnakartica = new Robnakartica();
-		robnakartica.id = Integer.parseInt(id.toString());
-		robnakartica.cena = cena;
-		robnakartica.pocStanjeKol = pocStanjeKol;
-		robnakartica.pocStanjeVrednosti = pocStanjeVrednosti;
-		robnakartica.prometUlazaKol = prometUlazaKol;
-		robnakartica.prometUlazaVr = prometUlazaVr;
-		robnakartica.prometIzlazaKol = prometIzlazaKol;
-		robnakartica.prometIzlazaVr = prometIzlazaVr;
-		robnakartica.ukKol = ukKol;
-		robnakartica.ukVrednost = ukVrednost;
+		Robnakartica robnakartica = new Robnakartica(cena, pocStanjeKol, pocStanjeVrednosti, prometUlazaKol, prometUlazaVr, prometIzlazaKol, prometIzlazaVr, ukKol, ukVrednost, poslovnagodina, magacin, roba);
 		robnakartica.save();
 	}
 	
-	public static void update(Integer id, BigDecimal cena, int pocStanjeKol, BigDecimal pocStanjeVrednosti, int prometUlazaKol, BigDecimal prometUlazaVr, int prometIzlazaKol, BigDecimal prometIzlazaVr, int ukKol, BigDecimal ukVrednost) {
+	public static void update(Long id, BigDecimal cena, int pocStanjeKol, BigDecimal pocStanjeVrednosti, int prometUlazaKol, BigDecimal prometUlazaVr, int prometIzlazaKol,
+			BigDecimal prometIzlazaVr, int ukKol, BigDecimal ukVrednost, Poslovnagodina poslovnagodina, Magacin magacin, Roba roba) {
 		
 		Robnakartica r = Robnakartica.findById(id);
-		r.id = Integer.parseInt(id.toString());
 		r.cena = cena;
 		r.pocStanjeKol = pocStanjeKol;
 		r.pocStanjeVrednosti = pocStanjeVrednosti;
@@ -52,6 +43,9 @@ public class Robnekartice extends Controller{
 		r.prometIzlazaVr = prometIzlazaVr;
 		r.ukKol = ukKol;
 		r.ukVrednost = ukVrednost;
+		r.poslovnaGodina = poslovnagodina;
+		r.magacin = magacin;
+		r.roba = roba;
 		r.save();
 		
 		read();

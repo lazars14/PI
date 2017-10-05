@@ -2,6 +2,8 @@ package controllers;
 
 import java.util.List;
 
+import models.Gruparoba;
+import models.Jedinicamere;
 import models.Radnik;
 import models.Roba;
 import play.mvc.Controller;
@@ -16,19 +18,21 @@ public class Robe extends Controller{
 		render(robe);
 	}
 	
-	public static void create(Integer id, String naziv) {
+	public static void create(String naziv, Integer pakovanje, Gruparoba gruparoba, Jedinicamere jedinicamere) {
 		
-		Roba r = new Roba(Integer.parseInt(id.toString()), naziv);
+		Roba r = new Roba(naziv, pakovanje, gruparoba, jedinicamere);
 		r.save();
 		
 		read();
 	}
 	
-	public static void update(Integer id, String naziv) {
+	public static void update(Long id, String naziv, Integer pakovanje, Gruparoba gruparoba, Jedinicamere jedinicamere) {
 		
 		Roba r = Roba.findById(id);
-		r.id = Integer.parseInt(id.toString());
 		r.naziv = naziv;
+		r.pakovanje = pakovanje;
+		r.grupaRobe = gruparoba;
+		r.jedinicaMere = jedinicamere;
 		r.save();
 		
 		read();
