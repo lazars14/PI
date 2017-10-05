@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Jedinice mere</title>
+</head>
+
+<script>
+
+function sync(item){
+    naziv = item.find(".j_naziv").html()
+    id = item.find(".j_id").html()
+    $("#naziv").val(naziv);
+    $("#id").val(id);
+}
+
+</script>
+
+#{script 'tables_and_forms.js' /}
+
+<body>
+	<h1>Jedinice mere</h1>
+	
+	<table border=1>
+		<tr class="header">
+			<th>naziv</th>
+		</tr>
+		#{list items:jedinice, as:'jedinica'}
+		<tr>
+			<td class="j_naziv">${ jedinica.naziv }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "j_id">${jedinica.id}</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<form id="crud" name="crud" action="" method="post">
+	
+		<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'naziv'}
+				<label for="${field.id}">Naziv</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+				
+		</div>
+		
+		<!-- #{secure.check "administrator"}  -->
+    	<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Jedinicemere.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Jedinicemere.edit()}')">Izmeni</button>
+			<button onclick="setFormAction('@{Jedinicemere.delete()}')">Obrisi</button>
+		</div>
+		<!-- #{/secure.check} -->
+		
+	</form>
+</body>
+</html>

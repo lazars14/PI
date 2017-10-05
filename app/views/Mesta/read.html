@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mesta</title>
+</head>
+
+<script>
+
+function sync(item){
+    naziv = item.find(".m_naziv").html()
+    pttOznaka = item.find(".m_pttOznaka").html()
+    id = item.find(".m_id").html()
+    $("#naziv").val(naziv);
+    $("#pttOznaka").val(pttOznaka);
+    $("#id").val(id);
+}
+
+</script>
+
+#{script 'tables_and_forms.js' /}
+
+<body>
+	<h1>Mesta</h1>
+	
+	<table border=1>
+		<tr class="header">
+			<th>naziv</th>
+			<th>ptt oznaka</th>
+		</tr>
+		#{list items:mesta, as:'mesto'}
+		<tr>
+			<td class="m_naziv">${ mesto.naziv }</td>
+			<td class="m_pttOznaka">${ mesto.pttOznaka }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "m_id">${mesto.id}</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<form id="crud" name="crud" action="" method="post">
+	
+		<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'naziv'}
+				<label for="${field.id}">Naziv</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'pttOznaka'}
+				<label for="${field.id}">Postanski broj</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+				
+		</div>
+		
+		<!-- #{secure.check "administrator"} -->
+		<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Mesta.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Mesta.edit()}')">Izmeni</button>
+			<button onclick="setFormAction('@{Mesta.delete()}')">Obrisi</button>
+		</div>
+		<!-- #{/secure.check} -->
+		
+	</form>
+</body>
+</html>

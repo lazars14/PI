@@ -1,0 +1,57 @@
+package controllers;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import models.Analitikamagacinskekartice;
+import models.Robnakartica;
+import play.data.validation.Required;
+import play.mvc.Controller;
+import play.mvc.With;
+
+//@With(Secure.class)
+public class Analitikemagacinskihkartica extends Controller {
+	
+	public static void read(){
+		List<Analitikamagacinskekartice> analitike = Analitikamagacinskekartice.findAll();
+        List<Robnakartica> robneKartice = Robnakartica.findAll();
+        
+        render(analitike,robneKartice);
+	}
+	
+	public static void create(Long redniBroj, String vrstaPrometa, String smer, Long kolicina,
+			Long cena, Long vrednost, Long robnaKarticaId){
+		Robnakartica robnaKartica = Robnakartica.findById(robnaKarticaId);
+		Analitikamagacinskekartice a = new Analitikamagacinskekartice(Integer.parseInt(redniBroj.toString()), vrstaPrometa, smer.charAt(0), Integer.parseInt(kolicina.toString()), new BigDecimal(cena), new BigDecimal(vrednost), robnaKartica);
+		a.save();
+		
+		read();
+	}
+
+	public static void update(Long id, Long redniBroj, String vrstaPrometa, String smer, Long kolicina,
+			Long cena, Long vrednost, Long robnaKarticaId){
+		Robnakartica robnaKarticaA = Robnakartica.findById(robnaKarticaId);
+		Analitikamagacinskekartice a = Analitikamagacinskekartice.findById(id);
+		a.redniBroj = Integer.parseInt(redniBroj.toString());
+		a.vrstaPrometa = vrstaPrometa;
+		a.smer = smer.charAt(0);
+		a.kolicina = Integer.parseInt(kolicina.toString());
+		a.cena = new BigDecimal(cena);
+		a.vrednost = new BigDecimal(vrednost);
+		a.robnaKartica = robnaKarticaA;
+		a.save();
+		
+		read();
+	}
+
+	public static void delete(Long id){
+		Analitikamagacinskekartice analitikaMagKartice = Analitikamagacinskekartice.findById(id);
+    	analitikaMagKartice.delete();
+    	
+    	read();
+	}
+
+	public static void filter(){
+	
+	}
+}
