@@ -25,33 +25,24 @@ import play.db.jpa.Model;
 @Entity
 public class Prometnidokument extends Model{
 
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
+
+    @Column(nullable = false)
     public Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2)
-    @Column(name = "vrstaDokumenta")
+    
+    @Column(nullable = false)
     public String vrstaDokumenta;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "redniBrojDokumenta")
+    
+    @Column(nullable = false)
     public int redniBrojDokumenta;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "datumFormiranja")
+    
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     public Date datumFormiranja;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "datumKnjizenja")
     @Temporal(TemporalType.DATE)
     public Date datumKnjizenja;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "statusDokumenta")
+    
+    @Column(nullable = false)
     public Character statusDokumenta;
     @JoinColumn(name = "magacin", referencedColumnName = "id")
     @ManyToOne(optional = false)

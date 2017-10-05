@@ -28,23 +28,17 @@ import play.db.jpa.Model;
 @Entity
 public class Poslovnagodina extends Model {
 
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
+
+    @Column(nullable = false)
     public Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "godina")
-    @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     public Date godina;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "zakljucena")
     public boolean zakljucena;
-    @JoinColumn(name = "preduzece", referencedColumnName = "id")
+    
     @ManyToOne(optional = false)
     public Preduzece preduzece;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "poslovnaGodina")
     public Collection<Robnakartica> robnakarticaCollection;    
 

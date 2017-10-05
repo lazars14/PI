@@ -20,30 +20,16 @@ import play.db.jpa.Model;
 
 @Entity
 public class Poslovnipartner extends Model {
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
+	
+    @Column(nullable = false)
     public Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "tipPartnera")
+    @Column(nullable = false)
     public String tipPartnera;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "nazivPartnera")
+    @Column(nullable = false)
     public String nazivPartnera;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 9)
-    @Column(name = "pib")
+    @Column(nullable = false)
     public String pib;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "adresa")
+    @Column(nullable = false)
     public String adresa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "poslovniPartner")
     public Collection<Prometnidokument> prometnidokumentCollection;
