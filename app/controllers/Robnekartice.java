@@ -18,7 +18,6 @@ public class Robnekartice extends Controller{
     	//List<Roba> robe = Roba.findAll();
     	//List<Magacin> magacini = Magacin.findAll();
     	//List<Poslovnagodina> poslovneGodine = Poslovnagodina.findAll();
-    	//comment
     	
     	render(robneKartice);
 	}

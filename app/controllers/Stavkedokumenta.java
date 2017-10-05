@@ -20,7 +20,6 @@ public class Stavkedokumenta extends Controller{
 		List<Stavkadokumenta> stavkeDok = Stavkadokumenta.findAll();
 		
 		render(stavkeDok);
-		//comment
 	}
 	
 	public static void crete(int kolicina, BigDecimal cena, BigDecimal vrednost, Analitikamagacinskekartice analitikamagacinskekartice, Roba roba, Prometnidokument prometnidokument) {

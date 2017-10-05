@@ -23,6 +23,7 @@ public class Radnici extends Controller{
 		r.save();
 		
 		read();
+		// comment
 	}
 	
 	public static void update(Long id, String ime, String prezime, String jmbg, String adresa, String radnoMesto, String korisnickoIme, String lozinka, Preduzece preduzece) {

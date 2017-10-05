@@ -22,6 +22,7 @@ public class Robe extends Controller{
 		
 		Roba r = new Roba(naziv, pakovanje, gruparoba, jedinicamere);
 		r.save();
+		// comment
 		
 		read();
 	}
