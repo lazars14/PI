@@ -22,25 +22,17 @@ import play.db.jpa.Model;
 @Entity
 public class Preduzece extends Model {
 
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id")
+	
+    @Column(nullable = false)
     public Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "naziv")
+    
+    @Column(nullable = false)
     public String naziv;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 9)
-    @Column(name = "pib")
+    
+    @Column(nullable = false)
     public String pib;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "adresa")
+    
+    @Column(nullable = false)
     public String adresa;
     @JoinColumn(name = "mesto", referencedColumnName = "id")
     @ManyToOne(optional = false)
