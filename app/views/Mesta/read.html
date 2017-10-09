@@ -45,7 +45,7 @@ function sync(item){
 		#{/list}
 	</table>
 	
-	<form id="crud" name="crud" action="" method="post">
+	<form id="crud" name="crud" action="" method="post" onsubmit="searchMesta()">
 	
 		<!--  panel  -->
 		<div>
@@ -55,14 +55,14 @@ function sync(item){
 				
 			<p>
 			#{field 'naziv'}
-				<label for="${field.id}">Naziv</label>
+				<label id="nazivlbl" for="${field.id}">Naziv</label>
 				<input type="text" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'pttOznaka'}
-				<label for="${field.id}">Postanski broj</label>
+				<label id="pttOznakalbl" for="${field.id}">Postanski broj</label>
 				<input type="text" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
@@ -74,7 +74,7 @@ function sync(item){
 			<input type="reset" value="Resetuj formu"/>
 			<button onclick="setFormAction('@{Mesta.create()}')">Dodaj</button>
 			<button onclick="setFormAction('@{Mesta.update()}')">Izmeni</button>
-			<button onclick="setFormAction('@{Mesta.delete()}')">Obrisi</button>
+			<button onclick="checkForDeletion('@{Mesta.delete()}','ovo mesto?')">Obrisi</button>
 		</div>
 		
 	</form>
