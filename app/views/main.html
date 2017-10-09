@@ -2,14 +2,12 @@
 
 <html>
     <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="${_response_encoding}">
+        <title>PI</title>
+        <meta charset="UTF-8">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
     </head>
     <body>
-        #{doLayout /}
             <ul>
               <li><a href="../../">Home</a></li>
               <li><a href="../Magacini/read">Magacini</a></li>
@@ -28,6 +26,5 @@
             </ul>
         
         <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-        #{get 'moreScripts' /}
     </body>
 </html>

@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
 <meta charset="UTF-8">
 <title>Mesta</title>
+
+
+
+
 </head>
 
 <script>
@@ -18,12 +26,12 @@ function sync(item){
 
 </script>
 
-#{script 'tables_and_forms.js' /}
+
 
 <body>
 	<h1>Mesta</h1>
 	
-	<table border=1>
+	<table id="entities" border=1>
 		<tr class="header">
 			<th>naziv</th>
 			<th>ptt oznaka</th>
@@ -61,15 +69,13 @@ function sync(item){
 				
 		</div>
 		
-		<!-- #{secure.check "administrator"} -->
 		<!--  buttons  -->
 		<div>
 			<input type="reset" value="Resetuj formu"/>
 			<button onclick="setFormAction('@{Mesta.create()}')">Dodaj</button>
-			<button onclick="setFormAction('@{Mesta.edit()}')">Izmeni</button>
+			<button onclick="setFormAction('@{Mesta.update()}')">Izmeni</button>
 			<button onclick="setFormAction('@{Mesta.delete()}')">Obrisi</button>
 		</div>
-		<!-- #{/secure.check} -->
 		
 	</form>
 </body>

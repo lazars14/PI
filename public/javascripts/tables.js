@@ -1,8 +1,3 @@
-function setFormAction(action){
-	document.getElementById("crud").action = action;
-	document.getElementById("crud").submit();
-}
-
 $(document).ready(function(){
 	  $("tr").click(function() {
 	  	if(!$(this).hasClass("header")){
@@ -11,4 +6,4 @@ $(document).ready(function(){
 	    	sync($(this));
 	    }
 	  });
-}
+});

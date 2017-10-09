@@ -2,6 +2,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables_and_forms.js'}" type="text/javascript" charset="UTF-8"></script>
 <title>Jedinice mere</title>
 </head>
 
@@ -16,7 +19,7 @@ function sync(item){
 
 </script>
 
-#{script 'tables_and_forms.js' /}
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
 
 <body>
 	<h1>Jedinice mere</h1>
@@ -50,15 +53,13 @@ function sync(item){
 				
 		</div>
 		
-		<!-- #{secure.check "administrator"}  -->
     	<!--  buttons  -->
 		<div>
 			<input type="reset" value="Resetuj formu"/>
 			<button onclick="setFormAction('@{Jedinicemere.create()}')">Dodaj</button>
-			<button onclick="setFormAction('@{Jedinicemere.edit()}')">Izmeni</button>
+			<button onclick="setFormAction('@{Jedinicemere.update()}')">Izmeni</button>
 			<button onclick="setFormAction('@{Jedinicemere.delete()}')">Obrisi</button>
 		</div>
-		<!-- #{/secure.check} -->
 		
 	</form>
 </body>
