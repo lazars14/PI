@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
+<meta charset="UTF-8">
+
+<title>Robne kartice</title>
+
+</head>
+
+function sync(item){
+    cena = item.find(".r_cena").html()
+    pocStanjeKol = item.find(".r_pocStanjeKol").html()
+    pocStanjeVrednosti = item.find(".r._pocStanjeVrednosti").html()
+	prometUlazaKol = item.find(".r_prometUlazaKol").html
+	prometUlazaVr = item.find(".r_prometUlazaVr").html()
+	prometIzlazaKol = item.find(".r_prometIzlazaKol").html()
+	prometIzlazaVr = item.find(".r_prometIzlazaVr").html()
+	ukKol = item.find(".r_ukKol").html()
+	ukVrednost = item.find(".r_ukVrednost").html()
+	poslovnaGodina = item.find(".r_poslovnaGodina").html()
+	magacin = item.find(".r_magacin").html()
+	roba = item.find(".r_roba").html()
+	id = item.find(".r_id").html()
+    $("#cena").val(cena);
+    $("#pocStanjeKol").val(pocStanjeKol);
+    $("#pocStanjeVrednosti").val(pocStanjeVrednosti);
+    $("#prometUlazaKol").val(prometUlazaKol);
+    $("#prometUlazaVr").val(prometUlazaVr);
+    $("#prometIzlazaKol").val(prometIzlazaKol);
+    $("#prometIzlazaVr").val(prometIzlazaVr);
+    $("#ukKol").val(ukKol);
+    $("#ukVrednost").val(ukVrednost);
+    $("#poslovnaGodina").val(poslovnaGodina);
+    $("#magacin").val(magacin);
+    $("#roba").val(roba);
+    $("#id").val(id);
+}
+
+</script>
+
+<body>
+	<h1>Robne kartice</h1>
+	
+	<table id="entities" border=1>
+		<tr class="header">
+			<th>cena</th>
+			<th>pocStanjeKol</th>
+			<th>pocStanjeVrednosti</th>
+			<th>prometUlazaKol</th>
+			<th>prometUlazaVr</th>
+			<th>prometIzlazaKol</th>
+			<th>prometIzlazaVr</th>
+			<th>ukKolicina</th>
+			<th>ukVrednost</th>
+			<th>poslovnaGodina</th>
+			<th>magacin</th>
+			<th>roba</th>
+		</tr>
+		#{list items:kartice, as:'kartica'}
+		<tr>
+			<td class="k_cena">${ kartica.cena }</td>
+			<td class="k_pocStanjeKol">${ kartica.pocStanjeKol }</td>
+			<td class="k_pocStanjeVrednosti">${ kartica.pocStanjeVrednosti }</td>
+			<td class="k_prometUlazaKol">${ kartica.prometUlazaKol }</td>
+			<td class="k_prometUlazaVr">${ kartica.prometUlazaVr }</td>
+			<td class="k_prometIzlazaKol">${ kartica.prometIzlazaKol }</td>
+			<td class="k_prometIzlazaVr">${ kartica.prometIzlazaVr }</td>
+			<td class="k_ukKol">${ kartica.ukKol }</td>
+			<td class="k_ukVrednost">${ kartica.ukVrednost }</td>
+			<td class="k_poslovnaGodina">${ kartica.poslovnaGodina }</td>
+			<td class="k_magacin">${ kartica.magacin }</td>
+			<td class="k_roba">${ kartica.roba }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "r_id">${kartica.id}</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<form id="crud" name="crud" action="" method="post" onsubmit="searchRobnekartice()">
+	
+		<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'cena'}
+				<label id="cenalbl" for="${field.id}">Cena</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'pocStanjeKol'}
+				<label id="pocStanjeKollbl" for="${field.id}">Pocetno stanje kolicine</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'pocStanjeVr'}
+				<label id="pocStanjeVrlbl" for="${field.id}">Pocetno stanje vrednosti</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'prometUlazaKol'}
+				<label id="prometUlazaKollbl" for="${field.id}">Promet ulaza kolicine</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'prometUlazaVr'}
+				<label id="prometUlazaVrlbl" for="${field.id}">Promet ulaza vrednosti</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'prometIzlazaKol'}
+				<label id="prometIzlazaKollbl" for="${field.id}">Promet izlaza kolicine</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'prometIzlazaVr'}
+				<label id="prometIzlazaVrlbl" for="${field.id}">Promet izlaza vrednosti</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>S
+			#{field 'poslovnaGodina'}
+				<label id="poslovnaGodinalbl" for="${field.id}">Poslovna godina</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'magacin'}
+				<label id="magacinlbl" for="${field.id}">Magacin</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'roba'}
+				<label id="robalbl" for="${field.id}">Roba</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+				
+		</div>
+		
+		<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Robnekartice.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Robnekartice.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Robnekartice.delete()}','ovu karticu?')">Obrisi</button>
+		</div>
+		
+	</form>
+
+</body>
+</html>

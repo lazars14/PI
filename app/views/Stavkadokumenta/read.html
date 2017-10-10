@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
+<meta charset="UTF-8">
+
+<title>Stavka dokumenta</title>
+
+</head>
+
+function sync(item){
+    kolicina = item.find(".s_kolicina").html()
+    cena = item.find(".s_cena").html()
+    vrednost = item.find(".s_vrednost").html()
+	analitikeMagacinskeKartice = item.find(".s_analitikeMagacinskeKartice").html
+	roba = item.find(".s_roba").html()
+	prometniDokument = item.find(".s_prometniDokument").html()
+	id = item.find(".s_id").html()
+    $("#kolicina").val(kolicina);
+    $("#cena").val(cena);
+    $("#vrednost").val(vrednost);
+    $("#analitikeRobneKartice").val(analitikeRobneKartice);
+    $("#roba").val(roba);
+    $("#prometniDokument").val(prometniDokument);
+    $("#id").val(id);
+}
+
+</script>
+
+<body>
+	<h1>Stavka dokumenta</h1>
+	
+	<table id="entities" border=1>
+		<tr class="header">
+			<th>kolicina</th>
+			<th>cena</th>
+			<th>vrednost</th>
+			<th>analitikeRobneKartice</th>
+			<th>roba</th>
+			<th>prometniDokument</th>
+		</tr>
+		#{list items:dokumenti, as:'dokument'}
+		<tr>
+			<td class="s_kolicina">${ dokument.kolicina }</td>
+			<td class="s_cena">${ dokument.cena }</td>
+			<td class="s_vrednost">${ dokument.vrednost }</td>
+			<td class="s_analitikeRobneKartice">${ dokument.analitikeRobneKartice }</td>
+			<td class="s_roba">${ dokument.roba }</td>
+			<td class="s_prometniDokument">${ dokument.prometniDokument }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "s_id">${dokument.id}</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<form id="crud" name="crud" action="" method="post" onsubmit="searchRadnici()">
+	
+		<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'kolicina'}
+				<label id="kolicinalbl" for="${field.id}">Kolicina</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'cena'}
+				<label id="cenalbl" for="${field.id}">Cena</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'vrednost'}
+				<label id="vrednostlbl" for="${field.id}">Vrednost</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'analitikeRobneKartice'}
+				<label id="analitikeRobneKarticelbl" for="${field.id}">Analitike robne kartice</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'roba'}
+				<label id="robalbl" for="${field.id}">Roba</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'prometniDokument'}
+				<label id="prometniDokumentlbl" for="${field.id}">Prometni dokument</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+
+		</div>
+		
+		<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Stavkedokumenta.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Stavkedokumenta.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Stavkedokumenta.delete()}','ovu stavku?')">Obrisi</button>
+		</div>
+		
+	</form>
+
+</body>
+</html>

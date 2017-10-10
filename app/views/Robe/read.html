@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
+<meta charset="UTF-8">
+
+<title>Robe</title>
+
+</head>
+
+<script>
+
+function sync(item){
+    naziv = item.find(".r_naziv").html()
+    pakovanje = item.find(".r_pakovanje").html()
+    grupaRobe = item.find(".r_grupaRobe").html()
+    jedinicaMere = item.find(".r_jedinicaMere").html()
+    id = item.find(".r_id").html()
+    $("#naziv").val(naziv);
+    $("#pakovanje").val(pakovanje);
+    $("#grupaRobe").val(grupaRobe);
+    $("#jedinicaMere").val(jedinicaMere);
+    $("#id").val(id);
+}
+
+</script>
+
+<body>
+	<h1>Robe</h1>
+	
+	<table id="entities" border=1>
+		<tr class="header">
+			<th>naziv</th>
+			<th>pakovanje</th>
+			<th>grupaRobe</th>
+			<th>jedinicaMere</th>		
+		</tr>
+		#{list items:robe, as:'roba'}
+		<tr>
+			<td class="r_naziv">${ roba.naziv }</td>
+			<td class="r_naziv">${ roba.pakovanje }</td>
+			<td class="r_naziv">${ roba.grupaRobe }</td>
+			<td class="r_naziv">${ roba.jedinicaMere }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "r_id">${roba.id}</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<form id="crud" name="crud" action="" method="post" onsubmit="searchRobe()">
+	
+		<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'naziv'}
+				<label id="nazivlbl" for="${field.id}">Naziv</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'pakovanje'}
+				<label id="pakovanjelbl" for="${field.id}">Pakovanje</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'grupeRobe'}
+				<label id="gruparobelbl" for="${field.id}">Grupa robe</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'jedinicaMere'}
+				<label id="jedinicamerelbl" for="${field.id}">Jedinica mere</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+				
+		</div>
+		
+		<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Robe.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Robe.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Robe.delete()}','ovu robu?')">Obrisi</button>
+		</div>
+		
+	</form>
+
+</body>
+</html>
+</html>

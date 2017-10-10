@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
+<meta charset="UTF-8">
+
+<title>Radnici</title>
+
+</head>
+
+function sync(item){
+    ime = item.find(".r_ime").html()
+    prezime = item.find(".r_prezime").html()
+    jmbg = item.find(".r._jmbg").html()
+	adresa = item.find(".r_adresa").html
+	radnoMesto = item.find(".r_radnoMesto").html()
+	korisnickoIme = item.find(".r_korisnickoIme").html()
+	lozinka = item.find(".r_lozinka").html()
+	preduzece = item.find(".r_preduzece").html()
+	id = item.find(".r_id").html()
+    $("#ime").val(ime);
+    $("#prezime").val(prezime);
+    $("#jmbg").val(jmbg);
+    $("#adresa").val(adresa);
+    $("#radnoMesto").val(radnoMesto);
+    $("#korisnickoIme").val(korisnickoIme);
+    $("#lozinka").val(lozinka);
+    $("#preduzece").val(preduzece);
+    $("#id").val(id);
+}
+
+</script>
+
+<body>
+	<h1>Radnici</h1>
+	
+	<table id="entities" border=1>
+		<tr class="header">
+			<th>ime</th>
+			<th>prezime</th>
+			<th>jmbg</th>
+			<th>adresa</th>
+			<th>radnoMesto</th>
+			<th>korisnickoIme</th>
+			<th>lozinka</th>
+			<th>preduzece</th>
+		</tr>
+		#{list items:radnici, as:'radnik'}
+		<tr>
+			<td class="r_ime">${ radnik.ime }</td>
+			<td class="r_prezime">${ radnik.prezime }</td>
+			<td class="r_jmbg">${ radnik.jmbg }</td>
+			<td class="r_adresa">${ radnik.adresa }</td>
+			<td class="r_radnoMesto">${ radnik.radnoMesto }</td>
+			<td class="r_korisnickoIme">${ radnik.korisnickoIme }</td>
+			<td class="r_lozinka">${ radnik.lozinka }</td>
+			<td class="r_preduzece">${ radnik.preduzece }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "r_id">${radnik.id}</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<form id="crud" name="crud" action="" method="post" onsubmit="searchRadnici()">
+	
+		<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'ime'}
+				<label id="imelbl" for="${field.id}">Ime</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'prezime'}
+				<label id="prezimelbl" for="${field.id}">Prezime</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'jmbg'}
+				<label id="jmbglbl" for="${field.id}">Jmbg</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'adresa'}
+				<label id="adresalbl" for="${field.id}">Adresa</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'radnoMesto'}
+				<label id="radnomestolbl" for="${field.id}">Radno mesto</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'korisnickoIme'}
+				<label id="korisnickoimelbl" for="${field.id}">Korisnicko ime</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'lozinka'}
+				<label id="lozinkalbl" for="${field.id}">Lozinka</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>S
+			#{field 'preduzece'}
+				<label id="preduzecelbl" for="${field.id}">Preduzece</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+				
+		</div>
+		
+		<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Radnici.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Radnici.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Radnici.delete()}','ovog radnika?')">Obrisi</button>
+		</div>
+		
+	</form>
+
+</body>
+</html>
