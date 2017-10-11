@@ -12,6 +12,8 @@
 
 </head>
 
+<script>
+
 function sync(item){
     ime = item.find(".r_ime").html()
     prezime = item.find(".r_prezime").html()
@@ -20,7 +22,7 @@ function sync(item){
 	radnoMesto = item.find(".r_radnoMesto").html()
 	korisnickoIme = item.find(".r_korisnickoIme").html()
 	lozinka = item.find(".r_lozinka").html()
-	preduzece = item.find(".r_preduzece").html()
+	preduzece = item.find(".r_p_id").html()
 	id = item.find(".r_id").html()
     $("#ime").val(ime);
     $("#prezime").val(prezime);
@@ -60,11 +62,12 @@ function sync(item){
 			<td class="r_lozinka">${ radnik.lozinka }</td>
 			<td class="r_preduzece">${ radnik.preduzece }</td>
 			<td style="visibility: hidden; max-width: 0px" class = "r_id">${radnik.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "r_p_id">${radnik.preduzece.id}</td>
 		</tr>
 		#{/list}
 	</table>
 	
-	<form id="crud" name="crud" action="" method="post" onsubmit="searchRadnici()">
+	<form id="crud" name="crud" action="" method="post">
 	
 		<!--  panel  -->
 		<div>
@@ -121,10 +124,14 @@ function sync(item){
 			#{/}
 			</p>
 			
-			<p>S
+			<p>
 			#{field 'preduzece'}
-				<label id="preduzecelbl" for="${field.id}">Preduzece</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<label for = "${field.id}">Preduzece</label>
+				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:preduzeca, as:'preduzece'}
+				<option value = "${preduzece.id}">${preduzece.naziv}</option>
+				#{/list}
+				</select>
 			#{/}
 			</p>
 				

@@ -17,19 +17,19 @@ public class Gruperoba extends Controller {
 		render(grupeRoba, preduzeca);
 	}
 	
-	public static void create(String naziv, Long idPreduzeca){
-		Preduzece preduzece = Preduzece.findById(idPreduzeca);
-		Gruparoba grupa = new Gruparoba(naziv, preduzece);
+	public static void create(String naziv, Long preduzece){
+		Preduzece p = Preduzece.findById(preduzece);
+		Gruparoba grupa = new Gruparoba(naziv, p);
 		grupa.save();
 		
 		read();
 	}
 
-	public static void update(Long id, String naziv, Long idPreduzeca){
-		Preduzece preduzece = Preduzece.findById(idPreduzeca);
+	public static void update(Long id, String naziv, Long preduzece){
+		Preduzece p = Preduzece.findById(preduzece);
 		Gruparoba grupa = Gruparoba.findById(id);
 		grupa.naziv = naziv;
-		grupa.preduzece = preduzece;
+		grupa.preduzece = p;
 		grupa.save();
 		
 		read();

@@ -13,20 +13,20 @@ public class Radnici extends Controller{
 	
 	public static void read() {
 		List<Radnik> radnici = Radnik.findAll();
+		List<Preduzece> preduzeca = Preduzece.findAll();
 		
-		render(radnici);
+		render(radnici, preduzeca);
 	}
 	
-	public static void create(String ime, String prezime, String jmbg, String adresa, String radnoMesto, String korisnickoIme, String lozinka, Preduzece preduzece) {
-		
-		Radnik r = new Radnik(ime, prezime, jmbg, adresa, radnoMesto, korisnickoIme, lozinka, preduzece);
+	public static void create(String ime, String prezime, String jmbg, String adresa, String radnoMesto, String korisnickoIme, String lozinka, Long preduzece) {
+		Preduzece p = Preduzece.findById(preduzece);
+		Radnik r = new Radnik(ime, prezime, jmbg, adresa, radnoMesto, korisnickoIme, lozinka, p);
 		r.save();
 		
 		read();
-		// comment
 	}
 	
-	public static void update(Long id, String ime, String prezime, String jmbg, String adresa, String radnoMesto, String korisnickoIme, String lozinka, Preduzece preduzece) {
+	public static void update(Long id, String ime, String prezime, String jmbg, String adresa, String radnoMesto, String korisnickoIme, String lozinka, Long preduzece) {
 		
 		Radnik r = Radnik.findById(id);
 		r.ime = ime;
@@ -36,7 +36,7 @@ public class Radnici extends Controller{
 		r.radnoMesto = radnoMesto;
 		r.korisnickoIme = korisnickoIme;
 		r.lozinka = lozinka;
-		r.preduzece = preduzece;
+		r.preduzece = Preduzece.findById(preduzece);
 		r.save();
 		
 		read();

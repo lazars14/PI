@@ -1,10 +1,85 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
+<title>Grupe roba</title>
+
 </head>
+
+<script>
+
+function sync(item){
+    naziv = item.find(".gr_naziv").html()
+    preduzece = item.find(".gr_p_id").html()
+	id = item.find(".gr_id").html()
+    $("#naziv").val(naziv);
+    $("#preduzece").val(preduzece);
+    $("#id").val(id);
+}
+
+</script>
+
 <body>
+	<h1>Grupe roba</h1>
+	
+	<table id="entities" border=1>
+		<tr class="header">
+			<th>naziv</th>
+			<th>preduzece</th>
+		</tr>
+		#{list items:grupeRoba, as:'grupa'}
+		<tr>
+			<td class="gr_naziv">${ grupa.naziv }</td>
+			<td class="gr_preduzece">${ grupa.preduzece.naziv }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "gr_id">${grupa.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "gr_p_id">${grupa.preduzece.id}</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<form id="crud" name="crud" action="" method="post">
+	
+		<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'naziv'}
+				<label id="nazivlbl" for="${field.id}">Naziv</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'preduzece'}
+				<label for = "${field.id}">Preduzece</label>
+				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:preduzeca, as:'preduzece'}
+				<option value = "${preduzece.id}">${preduzece.naziv}</option>
+				#{/list}
+				</select>
+			#{/}
+			</p>
+				
+		</div>
+		
+		<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Gruperoba.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Gruperoba.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Gruperoba.delete()}','ovu grupu robe?')">Obrisi</button>
+		</div>
+		
+	</form>
 
 </body>
 </html>
