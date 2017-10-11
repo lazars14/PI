@@ -12,24 +12,27 @@ public class Preduzeca extends Controller {
 	
 	public static void read(){
 		List<Preduzece> preduzeca = Preduzece.findAll();
-	
-		render(preduzeca);
+		List<Mesto> mesta = Mesto.findAll();
+		
+		render(preduzeca, mesta);
 	}
 	
-	public static void create(String naziv, String pib, String adresa, Mesto mesto){
-		Preduzece pr = new Preduzece(naziv, pib, adresa, mesto);
+	public static void create(String naziv, String pib, String adresa, Long mesto){
+		Mesto m = Mesto.findById(mesto);
+		Preduzece pr = new Preduzece(naziv, pib, adresa, m);
 		pr.save();
 		
 		read();
 	}
 
 	
-	public static void update(Long id, String naziv, String pib, String adresa, Mesto mesto){
+	public static void update(Long id, String naziv, String pib, String adresa, Long mesto){
+			Mesto m = Mesto.findById(mesto);
 			Preduzece pr = Preduzece.findById(id);
 			pr.naziv = naziv;
 			pr.pib = pib;
 			pr.adresa = adresa;
-			pr.mesto = mesto;
+			pr.mesto = m;
 			pr.save();
 			
 			read();

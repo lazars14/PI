@@ -12,13 +12,15 @@
 
 </head>
 
+<script>
+
 function sync(item){
     naziv = item.find(".p_naziv").html()
     pib = item.find(".p_pib").html()
-	adresa = item.find(".p_adresa").html
-	mesto = item.find(".p_mesto").html()
+	adresa = item.find(".p_adresa").html()
+	mesto = item.find(".p_m_id").html()
 	id = item.find(".p_id").html()
-    $("#naziv").val(tipPartnera);
+    $("#naziv").val(naziv);
     $("#pib").val(pib);
     $("#adresa").val(adresa);
     $("#mesto").val(mesto);
@@ -28,7 +30,7 @@ function sync(item){
 </script>
 
 <body>
-	<h1>-Preduzeca</h1>
+	<h1>Preduzeca</h1>
 	
 	<table id="entities" border=1>
 		<tr class="header">
@@ -42,8 +44,9 @@ function sync(item){
 			<td class="p_naziv">${ preduzece.naziv }</td>
 			<td class="p_pib">${ preduzece.pib }</td>
 			<td class="p_adresa">${ preduzece.adresa }</td>
-			<td class="p_mesto">${ preduzece.mesto }</td>
-			<td style="visibility: hidden; max-width: 0px" class = "pr_id">${preduzece.id}</td>
+			<td class="p_mesto">${ preduzece.mesto.naziv }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "p_id">${preduzece.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "p_m_id">${preduzece.mesto.id}</td>
 		</tr>
 		#{/list}
 	</table>
@@ -79,8 +82,12 @@ function sync(item){
 			
 			<p>
 			#{field 'mesto'}
-				<label id="mestolbl" for="${field.id}">Mesto</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<label for = "${field.id}">Mesto</label>
+				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:mesta, as:'mesto'}
+				<option value = "${mesto.id}">${mesto.naziv}</option>
+				#{/list}
+				</select>
 			#{/}
 			</p>
 				
