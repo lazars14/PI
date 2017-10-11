@@ -12,12 +12,14 @@
 
 </head>
 
+<script>
+
 function sync(item){
     tipPartnera = item.find(".pp_tipPartnera").html()
     nazivPartnera = item.find(".pp_nazivPartnera").html()
     pib = item.find(".pp_pib").html()
-	adresa = item.find(".pp_adresa").html
-	preduzece = item.find(".pp_preduzece").html()
+	adresa = item.find(".pp_adresa").html()
+	preduzece = item.find(".pp_p_id").html()
 	id = item.find(".pp_id").html()
     $("#tipPartnera").val(tipPartnera);
     $("#nazivPartnera").val(nazivPartnera);
@@ -30,7 +32,7 @@ function sync(item){
 </script>
 
 <body>
-	<h1>-Poslovni partneri</h1>
+	<h1>Poslovni partneri</h1>
 	
 	<table id="entities" border=1>
 		<tr class="header">
@@ -40,14 +42,15 @@ function sync(item){
 			<th>adresa</th>
 			<th>preduzece</th>
 		</tr>
-		#{list items:poslovnipartneri, as:'poslovnipartner'}
+		#{list items:poslovniPartneri, as:'poslovniPartner'}
 		<tr>
-			<td class="pp_tipPartnera">${ poslovnipartner.tipPartnera }</td>
-			<td class="pp_nazivPartnera">${ poslovnipartner.nazivPartnera }</td>
-			<td class="pp_pib">${ poslovnipartner.pib }</td>
-			<td class="pp_adresa">${ poslovnipartner.adresa }</td>
-			<td class="pp_preduzece">${ poslovnipartner.preduzece }</td>
-			<td style="visibility: hidden; max-width: 0px" class = "pp_id">${poslovnipartner.id}</td>
+			<td class="pp_tipPartnera">${ poslovniPartner.tipPartnera }</td>
+			<td class="pp_nazivPartnera">${ poslovniPartner.nazivPartnera }</td>
+			<td class="pp_pib">${ poslovniPartner.pib }</td>
+			<td class="pp_adresa">${ poslovniPartner.adresa }</td>
+			<td class="pp_preduzece">${ poslovniPartner.preduzece.naziv }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "pp_id">${poslovniPartner.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "pp_p_id">${poslovniPartner.preduzece.id}</td>
 		</tr>
 		#{/list}
 	</table>
@@ -90,8 +93,12 @@ function sync(item){
 			
 			<p>
 			#{field 'preduzece'}
-				<label id="preduzecelbl" for="${field.id}">Preduzece</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<label for = "${field.id}">Preduzece</label>
+				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:preduzeca, as:'preduzece'}
+				<option value = "${preduzece.id}">${preduzece.naziv}</option>
+				#{/list}
+				</select>
 			#{/}
 			</p>
 				

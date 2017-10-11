@@ -39,11 +39,13 @@ public class Poslovnipartner extends Model {
  
     @ManyToOne(optional = false)
     public Mesto mesto;
+    
     public Poslovnipartner(String tipPartnera, String nazivPartnera, String pib, String adresa, Preduzece preduzece) {
         this.tipPartnera = tipPartnera;
         this.nazivPartnera = nazivPartnera;
         this.pib = pib;
         this.adresa = adresa;
         this.preduzece = preduzece;
+        this.mesto = preduzece.mesto;
     }   
 }
