@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
+<meta charset="UTF-8">
+
+<title>Poslovni partneri</title>
+
+</head>
+
+function sync(item){
+    tipPartnera = item.find(".pp_tipPartnera").html()
+    nazivPartnera = item.find(".pp_nazivPartnera").html()
+    pib = item.find(".pp_pib").html()
+	adresa = item.find(".pp_adresa").html
+	preduzece = item.find(".pp_preduzece").html()
+	id = item.find(".pp_id").html()
+    $("#tipPartnera").val(tipPartnera);
+    $("#nazivPartnera").val(nazivPartnera);
+    $("#pib").val(pib);
+    $("#adresa").val(adresa);
+    $("#preduzece").val(preduzece);
+    $("#id").val(id);
+}
+
+</script>
+
+<body>
+	<h1>Poslovni partneri</h1>
+	
+	<table id="entities" border=1>
+		<tr class="header">
+			<th>Tip partnera</th>
+			<th>Naziv partnera</th>
+			<th>pib</th>
+			<th>adresa</th>
+			<th>preduzece</th>
+		</tr>
+		#{list items:poslovnipartneri, as:'poslovnipartner'}
+		<tr>
+			<td class="pp_tipPartnera">${ poslovnipartner.tipPartnera }</td>
+			<td class="pp_nazivPartnera">${ poslovnipartner.nazivPartnera }</td>
+			<td class="pp_pib">${ poslovnipartner.pib }</td>
+			<td class="pp_adresa">${ poslovnipartner.adresa }</td>
+			<td class="pp_preduzece">${ poslovnipartner.preduzece }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "pp_id">${poslovnipartner.id}</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<form id="crud" name="crud" action="" method="post" onsubmit="searchPoslovnipartneri()">
+	
+		<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'tipPartnera'}
+				<label id="tipPartneralbl" for="${field.id}">Tip partnera</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'nazivPartnera'}
+				<label id="nazivPartneralbl" for="${field.id}">Naziv partnera</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'pib'}
+				<label id="piblbl" for="${field.id}">pib</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'adresa'}
+				<label id="adresalbl" for="${field.id}">Adresa</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'preduzece'}
+				<label id="preduzecelbl" for="${field.id}">Preduzece</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+				
+		</div>
+		
+		<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Poslovnipartneri.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Poslovnipartneri.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Poslovnipartneri.delete()}','Ukloni poslovnog partnera?')">Obrisi</button>
+		</div>
+		
+	</form>
+
+</body>
+</html>

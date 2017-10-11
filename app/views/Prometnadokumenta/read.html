@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
+<meta charset="UTF-8">
+
+<title>Poslovna dokumenta</title>
+
+</head>
+
+function sync(item){
+    vrstaDokumenta = item.find(".pd_vrstaDokumenta").html()
+    redniBrojDokumenta = item.find(".pd_redniBrojDokumenta").html()
+    datumFormiranja = item.find(".pd_datumFormiranja").html()
+	datumKnjizenja = item.find(".pd_datumKnjizenja").html
+	statusDokumenta = item.find(".pd_statusDokumenta").html()
+	magacin = item.find(".pd_magacin").html
+	poslovniPartner = item.find(".pd_magacin").html()
+	id = item.find(".pp_id").html()
+    $("#vrstaDokumenta").val(vrstaDokumenta);
+    $("#redniBrojDokumenta").val(redniBrojDokumenta);
+    $("#datumFormiranja").val(datumFormiranja);
+    $("#datumKnjizenja").val(datumKnjizenja);
+    $("#statusDokumenta").val(statusDokumenta);
+    $("#magacin").val(magacin);
+    $("#poslovniPartner").val(poslovniPartner);
+    $("#id").val(id);
+}
+
+</script>
+
+<body>
+	<h1>Poslovna dokumenta</h1>
+	
+	<table id="entities" border=1>
+		<tr class="header">
+			<th>Vrsta dokumenta</th>
+			<th>Redni broj</th>
+			<th>Datum formiranja</th>
+			<th>Datum knjizenja</th>
+			<th>Status dokumenta</th>
+			<th>Magacin</th>
+			<th>Poslovni partner</th>
+		</tr>
+		#{list items:poslovnadokumenta, as:'poslovnidokument'}
+		<tr>
+			<td class="pd_vrstaDokumenta">${ poslovnidokument.vrstaDokumenta }</td>
+			<td class="pd_redniBrojDokumenta">${ poslovnidokument.redniBrojDokumenta }</td>
+			<td class="pd_datumFormiranja">${ poslovnidokument.datumFormiranja }</td>
+			<td class="pd_datumKnjizenja">${ poslovnidokument.datumKnjizenja }</td>
+			<td class="pd_statusDokumenta">${ poslovnidokument.statusDokumenta }</td>
+			<td class="pd_magacin">${ poslovnidokument.magacin }</td>
+			<td class="pd_poslovniPartner">${ poslovnidokument.poslovniPartner }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "pd_id">${poslovnidokumentr.id}</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<form id="crud" name="crud" action="" method="post" onsubmit="searchPoslovnadokumenta()">
+	
+		<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'vrstaDokumenta'}
+				<label id="vrstaDokumentalbl" for="${field.id}">Vrsta dokumenta</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'redniBrojDokumenta'}
+				<label id="redniBrojDokumentalbl" for="${field.id}">Redni broj dokumenta</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'datumFormiranja'}
+				<label id="datumFormiranjalbl" for="${field.id}">Datum formiranja dokumenta</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'datumKnjizenja'}
+				<label id="datumKnjizenjalbl" for="${field.id}">Datum knjizenja dokumenta</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'statusDokumenta'}
+				<label id="statusDokumentalbl" for="${field.id}">Status dokumenta</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'magacin'}
+				<label id="magacinlbl" for="${field.id}">Magacin</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'poslovniPartner'}
+				<label id="poslovniPartnerlbl" for="${field.id}">Poslovni partner</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+				
+		</div>
+		
+		<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Poslovnadokumentai.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Poslovnadokumenta.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Poslovnadokumenta.delete()}','Unisti dokumenta?')">Obrisi</button>
+		</div>
+		
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
+<meta charset="UTF-8">
+
+<title>Poslovne godine</title>
+
+</head>
+
+function sync(item){
+    godina = item.find(".pg_godina").html()
+    zakljucena = item.find(".pg_zakljucena").html()
+    preduzece = item.find(".pg_preduzece").html()
+	id = item.find(".r_id").html()
+    $("#godina").val(godina);
+    $("#zakljucena").val(zakljucena);
+    $("#preduzece").val(preduzece);
+    $("#id").val(id);
+}
+
+</script>
+
+<body>
+	<h1>Poslovne godine</h1>
+	
+	<table id="entities" border=1>
+		<tr class="header">
+			<th>godina</th>
+			<th>zakljucena</th>
+			<th>preduzece</th>
+			<th>id</th>
+		</tr>
+		#{list items:poslovnegodine, as:'poslovnagodina'}
+		<tr>
+			<td class="pg_godina">${ poslovnagodina.godina }</td>
+			<td class="pg_zakljucena">${ poslovnagodina.godina }</td>
+			<td class="pg_preduzece">${ poslovnagodina.preduzece }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "r_id">${radnik.id}</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<form id="crud" name="crud" action="" method="post" onsubmit="searchPoslovnegodine()">
+	
+		<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'godina'}
+				<label id="imelbl" for="${field.id}">Godina</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'zakljucena'}
+				<label id="zakljucenalbl" for="${field.id}">Zakljucena</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+
+			<p>
+			#{field 'preduzece'}
+				<label id="preduzecelbl" for="${field.id}">Preduzece</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+				
+		</div>
+		
+		<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Poslovnegodine.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Poslovnegodine.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Poslovnegodine.delete()}','Izbrisi poslovnu godinu?')">Obrisi</button>
+		</div>
+		
+	</form>
+
+</body>
+</html>

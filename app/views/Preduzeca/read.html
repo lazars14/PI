@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
+<meta charset="UTF-8">
+
+<title>Preduzeca</title>
+
+</head>
+
+function sync(item){
+    naziv = item.find(".p_naziv").html()
+    pib = item.find(".p_pib").html()
+	adresa = item.find(".p_adresa").html
+	mesto = item.find(".p_mesto").html()
+	id = item.find(".p_id").html()
+    $("#naziv").val(tipPartnera);
+    $("#pib").val(pib);
+    $("#adresa").val(adresa);
+    $("#mesto").val(mesto);
+    $("#id").val(id);
+}
+
+</script>
+
+<body>
+	<h1>Preduzeca</h1>
+	
+	<table id="entities" border=1>
+		<tr class="header">
+			<th>Naziv</th>
+			<th>pib</th>
+			<th>Adresa</th>
+			<th>Mesto</th>
+		</tr>
+		#{list items:preduzeca, as:'preduzece'}
+		<tr>
+			<td class="p_naziv">${ preduzece.naziv }</td>
+			<td class="p_pib">${ preduzece.pib }</td>
+			<td class="p_adresa">${ preduzece.adresa }</td>
+			<td class="p_mesto">${ preduzece.mesto }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "pr_id">${preduzece.id}</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<form id="crud" name="crud" action="" method="post" onsubmit="searchPreduzece()">
+	
+		<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'naziv'}
+				<label id="nazivlbl" for="${field.id}">Naziv</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'pib'}
+				<label id="piblbl" for="${field.id}">pib</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'adresa'}
+				<label id="adresalbl" for="${field.id}">Adresa</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'mesto'}
+				<label id="mestolbl" for="${field.id}">Mesto</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+				
+		</div>
+		
+		<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Preduzeca.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Preduzeca.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Preduzeca.delete()}','Spali ovo preduzece?')">Obrisi</button>
+		</div>
+		
+	</form>
+
+</body>
+</html>
