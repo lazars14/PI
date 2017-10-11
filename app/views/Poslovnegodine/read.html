@@ -12,13 +12,14 @@
 
 </head>
 
+<script>
 function sync(item){
     godina = item.find(".pg_godina").html()
-    zakljucena = item.find(".pg_zakljucena").html()
-    preduzece = item.find(".pg_preduzece").html()
-	id = item.find(".r_id").html()
+    zakljucena = (item.find(".pg_zakljucena").html() == 'true') ? true : false;
+    preduzece = item.find(".pg_p_id").html()
+	id = item.find(".pg_id").html()
     $("#godina").val(godina);
-    $("#zakljucena").val(zakljucena);
+    document.getElementById("zakljucena").checked = zakljucena;
     $("#preduzece").val(preduzece);
     $("#id").val(id);
 }
@@ -26,21 +27,21 @@ function sync(item){
 </script>
 
 <body>
-	<h1>-Poslovne godine</h1>
+	<h1>Poslovne godine</h1>
 	
 	<table id="entities" border=1>
 		<tr class="header">
 			<th>godina</th>
 			<th>zakljucena</th>
 			<th>preduzece</th>
-			<th>id</th>
 		</tr>
-		#{list items:poslovnegodine, as:'poslovnagodina'}
+		#{list items:poslovneGodine, as:'poslovnaGodina'}
 		<tr>
-			<td class="pg_godina">${ poslovnagodina.godina }</td>
-			<td class="pg_zakljucena">${ poslovnagodina.godina }</td>
-			<td class="pg_preduzece">${ poslovnagodina.preduzece }</td>
-			<td style="visibility: hidden; max-width: 0px" class = "r_id">${radnik.id}</td>
+			<td class="pg_godina">${ poslovnaGodina.godina }</td>
+			<td class="pg_zakljucena">${ poslovnaGodina.zakljucena }</td>
+			<td class="pg_preduzece">${ poslovnaGodina.preduzece.naziv }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "pg_id">${poslovnaGodina.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "pg_p_id">${poslovnaGodina.preduzece.id}</td>
 		</tr>
 		#{/list}
 	</table>
@@ -63,14 +64,18 @@ function sync(item){
 			<p>
 			#{field 'zakljucena'}
 				<label id="zakljucenalbl" for="${field.id}">Zakljucena</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<input type="checkbox" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
 
 			<p>
 			#{field 'preduzece'}
-				<label id="preduzecelbl" for="${field.id}">Preduzece</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<label for = "${field.id}">Preduzece</label>
+				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:preduzeca, as:'preduzece'}
+				<option value = "${preduzece.id}">${preduzece.naziv}</option>
+				#{/list}
+				</select>
 			#{/}
 			</p>
 				

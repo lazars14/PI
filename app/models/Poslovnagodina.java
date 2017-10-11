@@ -31,7 +31,7 @@ import play.db.jpa.Model;
 public class Poslovnagodina extends Model {
 
     @Column(nullable = false)
-    public Date godina;
+    public int godina;
     @Column(name = "zakljucena")
     public boolean zakljucena;
     
@@ -41,7 +41,7 @@ public class Poslovnagodina extends Model {
     @OneToMany(mappedBy = "poslovnaGodina")
     public List<Robnakartica> robnakarticaCollection;    
 
-    public Poslovnagodina(Date godina, boolean zakljucena, Preduzece preduzece) {
+    public Poslovnagodina(int godina, boolean zakljucena, Preduzece preduzece) {
         this.godina = godina;
         this.zakljucena = zakljucena;
         this.preduzece = preduzece;

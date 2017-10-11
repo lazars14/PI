@@ -14,25 +14,27 @@ public class Poslovnegodine extends Controller {
 	
 
 	public static void read(){
-		List<Poslovnagodina> poslovnagodina = Poslovnagodina.findAll();
+		List<Poslovnagodina> poslovneGodine = Poslovnagodina.findAll();
+		List<Preduzece> preduzeca = Preduzece.findAll();
 	
-		render(poslovnagodina);
+		render(poslovneGodine, preduzeca);
 	}
 	
-	public static void create(Date godina, boolean zakljucena, Preduzece preduzece){
-		Poslovnagodina pg = new Poslovnagodina(godina, zakljucena, preduzece);
+	public static void create(int godina, boolean zakljucena, Long preduzece){
+		Preduzece p = Preduzece.findById(preduzece);
+		Poslovnagodina pg = new Poslovnagodina(godina, zakljucena, p);
 		pg.save();
 		
 		read();
 	}
 
-	
-	public static void update(Long id, Date godina, boolean zakljucena, Preduzece preduzece){
+	public static void update(Long id, int godina, boolean zakljucena, Long preduzece){
+			Preduzece p = Preduzece.findById(preduzece);
 			Poslovnagodina pg = Poslovnagodina.findById(id);
 			pg.godina = godina;
 			pg.zakljucena = zakljucena;
+			pg.preduzece = p;
 			pg.save();
-			pg.preduzece = preduzece;
 			
 			read();
 	}
