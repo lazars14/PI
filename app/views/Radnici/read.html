@@ -17,8 +17,8 @@
 function sync(item){
     ime = item.find(".r_ime").html()
     prezime = item.find(".r_prezime").html()
-    jmbg = item.find(".r._jmbg").html()
-	adresa = item.find(".r_adresa").html
+    jmbg = item.find(".r_jmbg").html()
+	adresa = item.find(".r_adresa").html()
 	radnoMesto = item.find(".r_radnoMesto").html()
 	korisnickoIme = item.find(".r_korisnickoIme").html()
 	lozinka = item.find(".r_lozinka").html()
@@ -60,7 +60,7 @@ function sync(item){
 			<td class="r_radnoMesto">${ radnik.radnoMesto }</td>
 			<td class="r_korisnickoIme">${ radnik.korisnickoIme }</td>
 			<td class="r_lozinka">${ radnik.lozinka }</td>
-			<td class="r_preduzece">${ radnik.preduzece }</td>
+			<td class="r_preduzece">${ radnik.preduzece.naziv }</td>
 			<td style="visibility: hidden; max-width: 0px" class = "r_id">${radnik.id}</td>
 			<td style="visibility: hidden; max-width: 0px" class = "r_p_id">${radnik.preduzece.id}</td>
 		</tr>
