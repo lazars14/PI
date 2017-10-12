@@ -36,7 +36,7 @@ public class Roba extends Model{
 
     public Roba(String naziv, Integer pakovanje, Gruparoba gruparoba, Jedinicamere jedinicamere) {
         this.naziv = naziv;
-        this.pakovanje = Integer.parseInt(pakovanje.toString());
+        this.pakovanje = pakovanje;
         this.grupaRobe = gruparoba;
         this.jedinicaMere = jedinicamere;
     }

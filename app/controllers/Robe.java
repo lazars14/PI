@@ -14,26 +14,28 @@ public class Robe extends Controller{
 	
 	public static void read() {
 		List<Roba> robe = Roba.findAll();
+		List<Gruparoba> grupeRoba = Gruparoba.findAll();
+		List<Jedinicamere> jediniceMere = Jedinicamere.findAll();
 		
-		render(robe);
+		render(robe, grupeRoba, jediniceMere);
 	}
 	
-	public static void create(String naziv, Integer pakovanje, Gruparoba gruparoba, Jedinicamere jedinicamere) {
-		
-		Roba r = new Roba(naziv, pakovanje, gruparoba, jedinicamere);
+	public static void create(String naziv, Integer pakovanje, Long grupaRobe, Long jedinicaMere) {
+		Gruparoba roba = Gruparoba.findById(grupaRobe);
+		Jedinicamere mera = Jedinicamere.findById(jedinicaMere);
+		Roba r = new Roba(naziv, pakovanje, roba, mera);
 		r.save();
-		// comment
 		
 		read();
 	}
 	
-	public static void update(Long id, String naziv, Integer pakovanje, Gruparoba gruparoba, Jedinicamere jedinicamere) {
+	public static void update(Long id, String naziv, Integer pakovanje, Long grupaRobe, Long jedinicaMere) {
 		
 		Roba r = Roba.findById(id);
 		r.naziv = naziv;
 		r.pakovanje = pakovanje;
-		r.grupaRobe = gruparoba;
-		r.jedinicaMere = jedinicamere;
+		r.grupaRobe = Gruparoba.findById(grupaRobe);
+		r.jedinicaMere = Jedinicamere.findById(jedinicaMere);
 		r.save();
 		
 		read();

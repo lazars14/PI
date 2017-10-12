@@ -17,8 +17,8 @@
 function sync(item){
     naziv = item.find(".r_naziv").html()
     pakovanje = item.find(".r_pakovanje").html()
-    grupaRobe = item.find(".r_grupaRobe").html()
-    jedinicaMere = item.find(".r_jedinicaMere").html()
+    grupaRobe = item.find(".r_gr_id").html()
+    jedinicaMere = item.find(".r_jm_id").html()
     id = item.find(".r_id").html()
     $("#naziv").val(naziv);
     $("#pakovanje").val(pakovanje);
@@ -42,10 +42,12 @@ function sync(item){
 		#{list items:robe, as:'roba'}
 		<tr>
 			<td class="r_naziv">${ roba.naziv }</td>
-			<td class="r_naziv">${ roba.pakovanje }</td>
-			<td class="r_naziv">${ roba.grupaRobe }</td>
-			<td class="r_naziv">${ roba.jedinicaMere }</td>
+			<td class="r_pakovanje">${ roba.pakovanje }</td>
+			<td class="r_grupaRobe">${ roba.grupaRobe.naziv }</td>
+			<td class="r_jedinicaMere">${ roba.jedinicaMere.naziv }</td>
 			<td style="visibility: hidden; max-width: 0px" class = "r_id">${roba.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "r_gr_id">${roba.grupaRobe.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "r_jm_id">${roba.jedinicaMere.id}</td>
 		</tr>
 		#{/list}
 	</table>
@@ -73,16 +75,24 @@ function sync(item){
 			</p>
 			
 			<p>
-			#{field 'grupeRobe'}
-				<label id="gruparobelbl" for="${field.id}">Grupa robe</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{field 'grupaRobe'}
+				<label for = "${field.id}">Grupa robe</label>
+				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:grupeRoba, as:'roba'}
+				<option value = "${roba.id}">${roba.naziv}</option>
+				#{/list}
+				</select>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'jedinicaMere'}
-				<label id="jedinicamerelbl" for="${field.id}">Jedinica mere</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<label for = "${field.id}">Jedinica mere</label>
+				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:jediniceMere, as:'mera'}
+				<option value = "${mera.id}">${mera.naziv}</option>
+				#{/list}
+				</select>
 			#{/}
 			</p>
 				
