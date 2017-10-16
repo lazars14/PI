@@ -66,7 +66,11 @@ function sync(item){
 			<p>
 			#{field 'tipPartnera'}
 				<label id="tipPartneralbl" for="${field.id}">Tip partnera</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<select name="${field.name}" id="${field.id}">
+					<option value="kupac">kupac</option>
+					<option value="dobavljac">dobavljac</option>
+					<option value="kupac i dobavljac">kupac i dobavljac</option>
+				</select>
 			#{/}
 			</p>
 			
