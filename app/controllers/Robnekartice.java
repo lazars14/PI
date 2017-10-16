@@ -33,6 +33,8 @@ public class Robnekartice extends Controller{
 				prometUlazaKol, Double.valueOf(prometUlazaVr), prometIzlazaKol, Double.valueOf(prometIzlazaVr), ukKol,
 				Double.valueOf(ukVr), pGod, m, r);
 		robnakartica.save();
+		
+		read();
 	}
 	
 	public static void update(Long id, String cena, int pocStanjeKol, String pocStanjeVr, int prometUlazaKol,

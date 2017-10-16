@@ -17,26 +17,26 @@
 function sync(item){
     cena = item.find(".rk_cena").html()
     pocStanjeKol = item.find(".rk_pocStanjeKol").html()
-    pocStanjeVrednosti = item.find(".rk_pocStanjeVrednosti").html()
+    pocStanjeVrednosti = item.find(".rk_pocStanjeVr").html()
 	prometUlazaKol = item.find(".rk_prometUlazaKol").html()
 	prometUlazaVr = item.find(".rk_prometUlazaVr").html()
 	prometIzlazaKol = item.find(".rk_prometIzlazaKol").html()
 	prometIzlazaVr = item.find(".rk_prometIzlazaVr").html()
 	ukKol = item.find(".rk_ukKol").html()
-	ukVrednost = item.find(".rk_ukVrednost").html()
+	ukVr = item.find(".rk_ukVr").html()
 	poslovnaGodina = item.find(".rk_pg_id").html()
 	magacin = item.find(".rk_m_id").html()
 	roba = item.find(".rk_r_id").html()
 	id = item.find(".rk_id").html()
     $("#cena").val(cena);
     $("#pocStanjeKol").val(pocStanjeKol);
-    $("#pocStanjeVrednosti").val(pocStanjeVrednosti);
+    $("#pocStanjeVr").val(pocStanjeVrednosti);
     $("#prometUlazaKol").val(prometUlazaKol);
     $("#prometUlazaVr").val(prometUlazaVr);
     $("#prometIzlazaKol").val(prometIzlazaKol);
     $("#prometIzlazaVr").val(prometIzlazaVr);
     $("#ukKol").val(ukKol);
-    $("#ukVrednost").val(ukVrednost);
+    $("#ukVr").val(ukVr);
     $("#poslovnaGodina").val(poslovnaGodina);
     $("#magacin").val(magacin);
     $("#roba").val(roba);
@@ -63,18 +63,18 @@ function sync(item){
 			<th>magacin</th>
 			<th>roba</th>
 		</tr>
-		#{list items:kartice, as:'kartica'}
+		#{list items:robneKartice, as:'kartica'}
 		<tr>
 			<td class="rk_cena">${ kartica.cena }</td>
 			<td class="rk_pocStanjeKol">${ kartica.pocStanjeKol }</td>
-			<td class="rk_pocStanjeVrednosti">${ kartica.pocStanjeVrednosti }</td>
+			<td class="rk_pocStanjeVr">${ kartica.pocStanjeVrednosti }</td>
 			<td class="rk_prometUlazaKol">${ kartica.prometUlazaKol }</td>
 			<td class="rk_prometUlazaVr">${ kartica.prometUlazaVr }</td>
 			<td class="rk_prometIzlazaKol">${ kartica.prometIzlazaKol }</td>
 			<td class="rk_prometIzlazaVr">${ kartica.prometIzlazaVr }</td>
 			<td class="rk_ukKol">${ kartica.ukKol }</td>
-			<td class="rk_ukVrednost">${ kartica.ukVrednost }</td>
-			<td class="rk_poslovnaGodina">${ kartica.poslovnaGodina.godina }, ${ kartica.poslovnaGodina.naziv}</td>
+			<td class="rk_ukVr">${ kartica.ukVrednost }</td>
+			<td class="rk_poslovnaGodina">${ kartica.poslovnaGodina.godina }, ${ kartica.poslovnaGodina.preduzece.naziv}</td>
 			<td class="rk_magacin">${ kartica.magacin.naziv }</td>
 			<td class="rk_roba">${ kartica.roba.naziv }</td>
 			<td style="visibility: hidden; max-width: 0px" class = "rk_id">${kartica.id}</td>
