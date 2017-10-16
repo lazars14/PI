@@ -41,9 +41,9 @@ public class Analitikamagacinskekartice extends Model {
 	@Column(nullable = false)
     public int kolicina;
 	@Column(nullable = false)
-    public BigDecimal cena;
+    public Double cena;
 	@Column(nullable = false)
-    public BigDecimal vrednost;
+    public Double vrednost;
     
     @ManyToOne(optional = false)
     public Robnakartica robnaKartica;
@@ -51,7 +51,7 @@ public class Analitikamagacinskekartice extends Model {
     @OneToMany(mappedBy = "analitikaMagacinskeKartice")
     public List<Stavkadokumenta> stavkadokumentaCollection;
     
-    public Analitikamagacinskekartice(int redniBroj, String vrstaPrometa, Character smer, int kolicina, BigDecimal cena, BigDecimal vrednost, Robnakartica robnaKartica) {
+    public Analitikamagacinskekartice(int redniBroj, String vrstaPrometa, Character smer, int kolicina, Double cena, Double vrednost, Robnakartica robnaKartica) {
         this.redniBroj = redniBroj;
         this.vrstaPrometa = vrstaPrometa;
         this.smer = smer;

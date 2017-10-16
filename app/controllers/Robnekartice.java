@@ -22,29 +22,36 @@ public class Robnekartice extends Controller{
     	render(robneKartice, robe, magacini, poslovneGodine);
 	}
 
-	public static void create(BigDecimal cena, int pocStanjeKol, BigDecimal pocStanjeVrednosti, int prometUlazaKol, BigDecimal prometUlazaVr, int prometIzlazaKol,
-								BigDecimal prometIzlazaVr, int ukKol, BigDecimal ukVrednost, Poslovnagodina poslovnagodina, Magacin magacin, Roba roba) {
+	public static void create(String cena, int pocStanjeKol, String pocStanjeVr, int prometUlazaKol, String prometUlazaVr,
+			int prometIzlazaKol, String prometIzlazaVr, int ukKol, String ukVr, Long poslovnaGodina, Long magacin,
+			Long roba) {
 		
-		Robnakartica robnakartica = new Robnakartica(cena, pocStanjeKol, pocStanjeVrednosti, prometUlazaKol, prometUlazaVr, prometIzlazaKol, prometIzlazaVr, ukKol, ukVrednost, poslovnagodina, magacin, roba);
+		Poslovnagodina pGod = Poslovnagodina.findById(poslovnaGodina);
+		Magacin m = Magacin.findById(magacin);
+		Roba r = Roba.findById(roba);
+		Robnakartica robnakartica = new Robnakartica(Double.valueOf(cena), pocStanjeKol, Double.valueOf(pocStanjeVr),
+				prometUlazaKol, Double.valueOf(prometUlazaVr), prometIzlazaKol, Double.valueOf(prometIzlazaVr), ukKol,
+				Double.valueOf(ukVr), pGod, m, r);
 		robnakartica.save();
 	}
 	
-	public static void update(Long id, BigDecimal cena, int pocStanjeKol, BigDecimal pocStanjeVrednosti, int prometUlazaKol, BigDecimal prometUlazaVr, int prometIzlazaKol,
-			BigDecimal prometIzlazaVr, int ukKol, BigDecimal ukVrednost, Poslovnagodina poslovnagodina, Magacin magacin, Roba roba) {
-		
+	public static void update(Long id, String cena, int pocStanjeKol, String pocStanjeVr, int prometUlazaKol,
+			String prometUlazaVr, int prometIzlazaKol, String prometIzlazaVr, int ukKol, String ukVr,
+			Long poslovnaGodina, Long magacin, Long roba) {
+	
 		Robnakartica r = Robnakartica.findById(id);
-		r.cena = cena;
+		r.cena = Double.valueOf(cena);
 		r.pocStanjeKol = pocStanjeKol;
-		r.pocStanjeVrednosti = pocStanjeVrednosti;
+		r.pocStanjeVrednosti = Double.valueOf(pocStanjeVr);
 		r.prometUlazaKol = prometUlazaKol;
-		r.prometUlazaVr = prometUlazaVr;
+		r.prometUlazaVr = Double.valueOf(prometUlazaVr);
 		r.prometIzlazaKol = prometIzlazaKol;
-		r.prometIzlazaVr = prometIzlazaVr;
+		r.prometIzlazaVr = Double.valueOf(prometIzlazaVr);
 		r.ukKol = ukKol;
-		r.ukVrednost = ukVrednost;
-		r.poslovnaGodina = poslovnagodina;
-		r.magacin = magacin;
-		r.roba = roba;
+		r.ukVrednost = Double.valueOf(ukVr);
+		r.poslovnaGodina = Poslovnagodina.findById(poslovnaGodina);
+		r.magacin = Magacin.findById(magacin);
+		r.roba = Roba.findById(roba);
 		r.save();
 		
 		read();

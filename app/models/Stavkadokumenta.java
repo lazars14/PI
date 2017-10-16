@@ -19,9 +19,9 @@ public class Stavkadokumenta extends Model{
     @Column(nullable = false)
     public int kolicina;
     @Column(nullable = false)
-    public BigDecimal cena;
+    public Double cena;
     @Column(nullable = false)
-    public BigDecimal vrednost;
+    public Double vrednost;
     @ManyToOne(optional = false)
     public Analitikamagacinskekartice analitikaMagacinskeKartice;
     @ManyToOne(optional = false)
@@ -30,7 +30,7 @@ public class Stavkadokumenta extends Model{
     public Prometnidokument prometniDokument;
 
 
-    public Stavkadokumenta(int kolicina, BigDecimal cena, BigDecimal vrednost, Analitikamagacinskekartice analitikamagacinskekartice, Roba roba, Prometnidokument prometnidokument) {
+    public Stavkadokumenta(int kolicina, Double cena, Double vrednost, Analitikamagacinskekartice analitikamagacinskekartice, Roba roba, Prometnidokument prometnidokument) {
         this.kolicina = kolicina;
         this.cena = cena;
         this.vrednost = vrednost;

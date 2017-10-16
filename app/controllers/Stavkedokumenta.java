@@ -22,18 +22,18 @@ public class Stavkedokumenta extends Controller{
 		render(stavkeDok);
 	}
 	
-	public static void crete(int kolicina, BigDecimal cena, BigDecimal vrednost, Analitikamagacinskekartice analitikamagacinskekartice, Roba roba, Prometnidokument prometnidokument) {
+	public static void crete(int kolicina, String cena, String vrednost, Analitikamagacinskekartice analitikamagacinskekartice, Roba roba, Prometnidokument prometnidokument) {
 		
-		Stavkadokumenta stavkadokumenta = new Stavkadokumenta(kolicina, cena, vrednost, analitikamagacinskekartice, roba, prometnidokument);
+		Stavkadokumenta stavkadokumenta = new Stavkadokumenta(kolicina, Double.valueOf(cena), Double.valueOf(vrednost), analitikamagacinskekartice, roba, prometnidokument);
 		stavkadokumenta.save();
 	}
 	
-	public static void update(Long id, int kolicina, BigDecimal cena, BigDecimal vrednost, Analitikamagacinskekartice analitikamagacinskekartice, Roba roba, Prometnidokument prometnidokument) {
+	public static void update(Long id, int kolicina, String cena, String vrednost, Analitikamagacinskekartice analitikamagacinskekartice, Roba roba, Prometnidokument prometnidokument) {
 		
 		Stavkadokumenta s = Stavkadokumenta.findById(id);
 		s.kolicina = kolicina;
-		s.cena = cena;
-		s.vrednost  = vrednost;
+		s.cena = Double.valueOf(cena);
+		s.vrednost  = Double.valueOf(vrednost);
 		s.analitikaMagacinskeKartice = analitikamagacinskekartice;
 		s.roba = roba;
 		s.prometniDokument = prometnidokument;

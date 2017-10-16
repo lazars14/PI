@@ -24,9 +24,9 @@ function sync(item){
 	prometIzlazaVr = item.find(".rk_prometIzlazaVr").html()
 	ukKol = item.find(".rk_ukKol").html()
 	ukVrednost = item.find(".rk_ukVrednost").html()
-	poslovnaGodina = item.find(".rk_poslovnaGodina").html()
-	magacin = item.find(".rk_magacin").html()
-	roba = item.find(".rk_roba").html()
+	poslovnaGodina = item.find(".rk_pg_id").html()
+	magacin = item.find(".rk_m_id").html()
+	roba = item.find(".rk_r_id").html()
 	id = item.find(".rk_id").html()
     $("#cena").val(cena);
     $("#pocStanjeKol").val(pocStanjeKol);
@@ -74,9 +74,9 @@ function sync(item){
 			<td class="rk_prometIzlazaVr">${ kartica.prometIzlazaVr }</td>
 			<td class="rk_ukKol">${ kartica.ukKol }</td>
 			<td class="rk_ukVrednost">${ kartica.ukVrednost }</td>
-			<td class="rk_poslovnaGodina">${ kartica.poslovnaGodina }</td>
-			<td class="rk_magacin">${ kartica.magacin }</td>
-			<td class="rk_roba">${ kartica.roba }</td>
+			<td class="rk_poslovnaGodina">${ kartica.poslovnaGodina.godina }, ${ kartica.poslovnaGodina.naziv}</td>
+			<td class="rk_magacin">${ kartica.magacin.naziv }</td>
+			<td class="rk_roba">${ kartica.roba.naziv }</td>
 			<td style="visibility: hidden; max-width: 0px" class = "rk_id">${kartica.id}</td>
 			<td style="visibility: hidden; max-width: 0px" class = "rk_pg_id">${kartica.poslovnaGodina.id}</td>
 			<td style="visibility: hidden; max-width: 0px" class = "rk_m_id">${kartica.magacin.id}</td>
@@ -142,12 +142,26 @@ function sync(item){
 			#{/}
 			</p>
 			
-			<p>S
+			<p>
+			#{field 'ukKol'}
+				<label id="ukKollbl" for="${field.id}">Ukupna kolicina</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'ukVr'}
+				<label id="ukVrlbl" for="${field.id}">Ukupna vrednost</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
 			#{field 'poslovnaGodina'}
 				<label for = "${field.id}">Poslovna godina</label>
 				<select name = "${field.name}" id = "${field.id}"/>
 				#{list items:poslovneGodine, as:'godina'}
-				<option value = "${godina.id}">${godina.godina}, ${godina.preduzece.naziv}</option>
+				<option value ="${godina.id}">${godina.godina}, ${godina.preduzece.naziv}</option>
 				#{/list}
 				</select>
 			#{/}

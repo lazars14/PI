@@ -22,7 +22,7 @@ public class Analitikemagacinskihkartica extends Controller {
 	public static void create(Long redniBroj, String vrstaPrometa, String smer, Long kolicina,
 			Long cena, Long vrednost, Long robnaKarticaId){
 		Robnakartica robnaKartica = Robnakartica.findById(robnaKarticaId);
-		Analitikamagacinskekartice a = new Analitikamagacinskekartice(Integer.parseInt(redniBroj.toString()), vrstaPrometa, smer.charAt(0), Integer.parseInt(kolicina.toString()), new BigDecimal(cena), new BigDecimal(vrednost), robnaKartica);
+		Analitikamagacinskekartice a = new Analitikamagacinskekartice(Integer.parseInt(redniBroj.toString()), vrstaPrometa, smer.charAt(0), Integer.parseInt(kolicina.toString()), Double.valueOf(cena), Double.valueOf(vrednost), robnaKartica);
 		a.save();
 		
 		read();
@@ -36,8 +36,8 @@ public class Analitikemagacinskihkartica extends Controller {
 		a.vrstaPrometa = vrstaPrometa;
 		a.smer = smer.charAt(0);
 		a.kolicina = Integer.parseInt(kolicina.toString());
-		a.cena = new BigDecimal(cena);
-		a.vrednost = new BigDecimal(vrednost);
+		a.cena = Double.valueOf(cena);
+		a.vrednost = Double.valueOf(vrednost);
 		a.robnaKartica = robnaKarticaA;
 		a.save();
 		

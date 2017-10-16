@@ -20,23 +20,23 @@ import play.db.jpa.Model;
 public class Robnakartica extends Model{
 	
     @Column(nullable = false)
-    public BigDecimal cena;
+    public Double cena;
     @Column(nullable = false)
     public int pocStanjeKol;
     @Column(nullable = false)
-    public BigDecimal pocStanjeVrednosti;
+    public Double pocStanjeVrednosti;
     @Column(nullable = false)
     public int prometUlazaKol;
     @Column(nullable = false)
-    public BigDecimal prometUlazaVr;
+    public Double prometUlazaVr;
     @Column(nullable = false)
     public int prometIzlazaKol;
     @Column(nullable = false)
-    public BigDecimal prometIzlazaVr;
+    public Double prometIzlazaVr;
     @Column(nullable = false)
     public int ukKol;
     @Column(nullable = false)
-    public BigDecimal ukVrednost;
+    public Double ukVrednost;
 
     @ManyToOne(optional = false)
     public Poslovnagodina poslovnaGodina;
@@ -48,8 +48,8 @@ public class Robnakartica extends Model{
     @OneToMany(mappedBy = "robnaKartica")
     public List<Analitikamagacinskekartice> analitikamagacinskekarticeCollection;
     
-    public Robnakartica(BigDecimal cena, int pocStanjeKol, BigDecimal pocStanjeVrednosti, int prometUlazaKol, BigDecimal prometUlazaVr, int prometIzlazaKol,
-    					BigDecimal prometIzlazaVr, int ukKol, BigDecimal ukVrednost, Poslovnagodina poslovnagodina, Magacin magacin, Roba roba) {
+    public Robnakartica(Double cena, int pocStanjeKol, Double pocStanjeVrednosti, int prometUlazaKol, Double prometUlazaVr, int prometIzlazaKol,
+    					Double prometIzlazaVr, int ukKol, Double ukVrednost, Poslovnagodina poslovnagodina, Magacin magacin, Roba roba) {
         this.cena = cena;
         this.pocStanjeKol = pocStanjeKol;
         this.pocStanjeVrednosti = pocStanjeVrednosti;
@@ -63,9 +63,4 @@ public class Robnakartica extends Model{
         this.magacin = magacin;
         this.roba = roba;
     }
-
-	public Robnakartica() {
-		// TODO Auto-generated constructor stub
-	}
-
 }
