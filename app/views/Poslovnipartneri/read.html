@@ -77,21 +77,21 @@ function sync(item){
 			<p>
 			#{field 'nazivPartnera'}
 				<label id="nazivPartneralbl" for="${field.id}">Naziv partnera</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<input type="text" maxlength="100" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'pib'}
 				<label id="piblbl" for="${field.id}">pib</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<input type="text" minlength="9" maxlength="9" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'adresa'}
 				<label id="adresalbl" for="${field.id}">Adresa</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<input type="text" maxlength="100" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
 			

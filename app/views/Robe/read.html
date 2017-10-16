@@ -63,14 +63,14 @@ function sync(item){
 			<p>
 			#{field 'naziv'}
 				<label id="nazivlbl" for="${field.id}">Naziv</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<input type="text" maxlength="100" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'pakovanje'}
 				<label id="pakovanjelbl" for="${field.id}">Pakovanje</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<input type="number" min="1" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
 			
