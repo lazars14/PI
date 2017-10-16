@@ -18,7 +18,6 @@ public class Stavkadokumenta extends Model{
 
     @Column(nullable = false)
     public int kolicina;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(nullable = false)
     public BigDecimal cena;
     @Column(nullable = false)
@@ -39,10 +38,4 @@ public class Stavkadokumenta extends Model{
         this.roba = roba;
         this.prometniDokument = prometnidokument;
     }
-
-
-	public Stavkadokumenta() {
-		// TODO Auto-generated constructor stub
-	}
-
 }

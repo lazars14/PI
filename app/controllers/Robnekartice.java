@@ -15,11 +15,11 @@ public class Robnekartice extends Controller{
 
 	public static void read() {
     	List<Robnakartica> robneKartice = Robnakartica.findAll();
-    	//List<Roba> robe = Roba.findAll();
-    	//List<Magacin> magacini = Magacin.findAll();
-    	//List<Poslovnagodina> poslovneGodine = Poslovnagodina.findAll();
+    	List<Roba> robe = Roba.findAll();
+    	List<Magacin> magacini = Magacin.findAll();
+    	List<Poslovnagodina> poslovneGodine = Poslovnagodina.findAll();
     	
-    	render(robneKartice);
+    	render(robneKartice, robe, magacini, poslovneGodine);
 	}
 
 	public static void create(BigDecimal cena, int pocStanjeKol, BigDecimal pocStanjeVrednosti, int prometUlazaKol, BigDecimal prometUlazaVr, int prometIzlazaKol,

@@ -15,19 +15,19 @@
 <script>
 
 function sync(item){
-    cena = item.find(".r_cena").html()
-    pocStanjeKol = item.find(".r_pocStanjeKol").html()
-    pocStanjeVrednosti = item.find(".r._pocStanjeVrednosti").html()
-	prometUlazaKol = item.find(".r_prometUlazaKol").html
-	prometUlazaVr = item.find(".r_prometUlazaVr").html()
-	prometIzlazaKol = item.find(".r_prometIzlazaKol").html()
-	prometIzlazaVr = item.find(".r_prometIzlazaVr").html()
-	ukKol = item.find(".r_ukKol").html()
-	ukVrednost = item.find(".r_ukVrednost").html()
-	poslovnaGodina = item.find(".r_poslovnaGodina").html()
-	magacin = item.find(".r_magacin").html()
-	roba = item.find(".r_roba").html()
-	id = item.find(".r_id").html()
+    cena = item.find(".rk_cena").html()
+    pocStanjeKol = item.find(".rk_pocStanjeKol").html()
+    pocStanjeVrednosti = item.find(".rk_pocStanjeVrednosti").html()
+	prometUlazaKol = item.find(".rk_prometUlazaKol").html()
+	prometUlazaVr = item.find(".rk_prometUlazaVr").html()
+	prometIzlazaKol = item.find(".rk_prometIzlazaKol").html()
+	prometIzlazaVr = item.find(".rk_prometIzlazaVr").html()
+	ukKol = item.find(".rk_ukKol").html()
+	ukVrednost = item.find(".rk_ukVrednost").html()
+	poslovnaGodina = item.find(".rk_poslovnaGodina").html()
+	magacin = item.find(".rk_magacin").html()
+	roba = item.find(".rk_roba").html()
+	id = item.find(".rk_id").html()
     $("#cena").val(cena);
     $("#pocStanjeKol").val(pocStanjeKol);
     $("#pocStanjeVrednosti").val(pocStanjeVrednosti);
@@ -51,33 +51,36 @@ function sync(item){
 	<table id="entities" border=1>
 		<tr class="header">
 			<th>cena</th>
-			<th>pocStanjeKol</th>
-			<th>pocStanjeVrednosti</th>
-			<th>prometUlazaKol</th>
-			<th>prometUlazaVr</th>
-			<th>prometIzlazaKol</th>
-			<th>prometIzlazaVr</th>
-			<th>ukKolicina</th>
-			<th>ukVrednost</th>
-			<th>poslovnaGodina</th>
+			<th>pocetno stanje kolicina</th>
+			<th>pocetno stanje vrednosti</th>
+			<th>promet ulaza kolicine</th>
+			<th>promet ulaza vrednosti</th>
+			<th>promet izlaza kolicine</th>
+			<th>promet izlaza vrednosti</th>
+			<th>ukupna kolicina</th>
+			<th>ukupna vrednost</th>
+			<th>poslovna godina</th>
 			<th>magacin</th>
 			<th>roba</th>
 		</tr>
 		#{list items:kartice, as:'kartica'}
 		<tr>
-			<td class="k_cena">${ kartica.cena }</td>
-			<td class="k_pocStanjeKol">${ kartica.pocStanjeKol }</td>
-			<td class="k_pocStanjeVrednosti">${ kartica.pocStanjeVrednosti }</td>
-			<td class="k_prometUlazaKol">${ kartica.prometUlazaKol }</td>
-			<td class="k_prometUlazaVr">${ kartica.prometUlazaVr }</td>
-			<td class="k_prometIzlazaKol">${ kartica.prometIzlazaKol }</td>
-			<td class="k_prometIzlazaVr">${ kartica.prometIzlazaVr }</td>
-			<td class="k_ukKol">${ kartica.ukKol }</td>
-			<td class="k_ukVrednost">${ kartica.ukVrednost }</td>
-			<td class="k_poslovnaGodina">${ kartica.poslovnaGodina }</td>
-			<td class="k_magacin">${ kartica.magacin }</td>
-			<td class="k_roba">${ kartica.roba }</td>
-			<td style="visibility: hidden; max-width: 0px" class = "r_id">${kartica.id}</td>
+			<td class="rk_cena">${ kartica.cena }</td>
+			<td class="rk_pocStanjeKol">${ kartica.pocStanjeKol }</td>
+			<td class="rk_pocStanjeVrednosti">${ kartica.pocStanjeVrednosti }</td>
+			<td class="rk_prometUlazaKol">${ kartica.prometUlazaKol }</td>
+			<td class="rk_prometUlazaVr">${ kartica.prometUlazaVr }</td>
+			<td class="rk_prometIzlazaKol">${ kartica.prometIzlazaKol }</td>
+			<td class="rk_prometIzlazaVr">${ kartica.prometIzlazaVr }</td>
+			<td class="rk_ukKol">${ kartica.ukKol }</td>
+			<td class="rk_ukVrednost">${ kartica.ukVrednost }</td>
+			<td class="rk_poslovnaGodina">${ kartica.poslovnaGodina }</td>
+			<td class="rk_magacin">${ kartica.magacin }</td>
+			<td class="rk_roba">${ kartica.roba }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "rk_id">${kartica.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "rk_pg_id">${kartica.poslovnaGodina.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "rk_m_id">${kartica.magacin.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "rk_r_id">${kartica.roba.id}</td>
 		</tr>
 		#{/list}
 	</table>
@@ -141,22 +144,34 @@ function sync(item){
 			
 			<p>S
 			#{field 'poslovnaGodina'}
-				<label id="poslovnaGodinalbl" for="${field.id}">Poslovna godina</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<label for = "${field.id}">Poslovna godina</label>
+				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:poslovneGodine, as:'godina'}
+				<option value = "${godina.id}">${godina.godina}, ${godina.preduzece.naziv}</option>
+				#{/list}
+				</select>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'magacin'}
-				<label id="magacinlbl" for="${field.id}">Magacin</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<label for = "${field.id}">Magacin</label>
+				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:magacini, as:'magacin'}
+				<option value = "${magacin.id}">${magacin.naziv}</option>
+				#{/list}
+				</select>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'roba'}
-				<label id="robalbl" for="${field.id}">Roba</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<label for = "${field.id}">Roba</label>
+				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:robe, as:'roba'}
+				<option value = "${roba.id}">${roba.naziv}</option>
+				#{/list}
+				</select>
 			#{/}
 			</p>
 				

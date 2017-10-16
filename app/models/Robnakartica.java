@@ -37,8 +37,7 @@ public class Robnakartica extends Model{
     public int ukKol;
     @Column(nullable = false)
     public BigDecimal ukVrednost;
-    @OneToMany(mappedBy = "robnaKartica")
-    public List<Analitikamagacinskekartice> analitikamagacinskekarticeCollection;
+
     @ManyToOne(optional = false)
     public Poslovnagodina poslovnaGodina;
     @ManyToOne(optional = false)
@@ -46,6 +45,9 @@ public class Robnakartica extends Model{
     @ManyToOne(optional = false)
     public Roba roba;
 
+    @OneToMany(mappedBy = "robnaKartica")
+    public List<Analitikamagacinskekartice> analitikamagacinskekarticeCollection;
+    
     public Robnakartica(BigDecimal cena, int pocStanjeKol, BigDecimal pocStanjeVrednosti, int prometUlazaKol, BigDecimal prometUlazaVr, int prometIzlazaKol,
     					BigDecimal prometIzlazaVr, int ukKol, BigDecimal ukVrednost, Poslovnagodina poslovnagodina, Magacin magacin, Roba roba) {
         this.cena = cena;
