@@ -12,6 +12,8 @@
 
 </head>
 
+<script>
+
 function sync(item){
     vrstaDokumenta = item.find(".pd_vrstaDokumenta").html()
     redniBrojDokumenta = item.find(".pd_redniBrojDokumenta").html()
@@ -34,7 +36,7 @@ function sync(item){
 </script>
 
 <body>
-	<h1>-Poslovna dokumenta</h1>
+	<h1>Poslovna dokumenta</h1>
 	
 	<table id="entities" border=1>
 		<tr class="header">
@@ -71,7 +73,11 @@ function sync(item){
 			<p>
 			#{field 'vrstaDokumenta'}
 				<label id="vrstaDokumentalbl" for="${field.id}">Vrsta dokumenta</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<select name="${field.name}" id="${field.id}">
+					<option value="Pr">Prijemnica</option>
+					<option value="Ot">Otpremnica</option>
+					<option value="Mm">Medju-magacinski</option>
+				</select>
 			#{/}
 			</p>
 			
@@ -99,21 +105,40 @@ function sync(item){
 			<p>
 			#{field 'statusDokumenta'}
 				<label id="statusDokumentalbl" for="${field.id}">Status dokumenta</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<select name="${field.name}" id="${field.id}">
+					<option value="F">Fakturisano</option>
+					<option value="P">Proknjizeno</option>
+					<option value="S">S</option>
+				</select>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'magacin'}
-				<label id="magacinlbl" for="${field.id}">Magacin</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<label for = "${field.id}">Magacin</label>
+				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:magacini, as:'magacin'}
+				<option value = "${magacin.id}">${magacin.naziv}</option>
+				#{/list}
+				</select>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'poslovniPartner'}
-				<label id="poslovniPartnerlbl" for="${field.id}">Poslovni partner</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<label for = "${field.id}">Poslovni partner</label>
+				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:partneri, as:'partner'}
+				<option value = "${partner.id}">${partner.nazivPartnera}</option>
+				#{/list}
+				</select>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'stavke'}
+				<label for = "${field.id}">Stavke</label>
+				<!-- za modal, stavke u tabeli i panel za editovanje -->
 			#{/}
 			</p>
 				
@@ -122,9 +147,9 @@ function sync(item){
 		<!--  buttons  -->
 		<div>
 			<input type="reset" value="Resetuj formu"/>
-			<button onclick="setFormAction('@{Poslovnadokumentai.create()}')">Dodaj</button>
-			<button onclick="setFormAction('@{Poslovnadokumenta.update()}')">Izmeni</button>
-			<button onclick="checkForDeletion('@{Poslovnadokumenta.delete()}','Unisti dokumenta?')">Obrisi</button>
+			<button onclick="setFormAction('@{Prometnadokumenta.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Prometnadokumenta.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Prometnadokumenta.delete()}','Unisti dokumenta?')">Obrisi</button>
 		</div>
 		
 	</form>
