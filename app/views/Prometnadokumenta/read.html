@@ -33,6 +33,12 @@ function sync(item){
     $("#id").val(id);
 }
 
+function checkStatus(){
+	if(document.getElementById("statusDokumenta") != "F"){
+		document.getElementById("proknjizavanje").disabled = true;
+	}
+}
+
 </script>
 
 <body>
@@ -88,20 +94,20 @@ function sync(item){
 			<p>
 			#{field 'redniBrojDokumenta'}
 				<label id="redniBrojDokumentalbl" for="${field.id}">Redni broj dokumenta</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
+				<input type="number" min="1" name="${field.name}" id="${field.id}" disabled="true"/>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'datumFormiranja'}
-				<label id="datumFormiranjalbl" for="${field.id}">Datum formiranja dokumenta</label>
+				<label id="datumFormiranjalbl" for="${field.id}">Datum formiranja dokumenta (dd-MM-yyyy)</label>
 				<input type="text" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'datumKnjizenja'}
-				<label id="datumKnjizenjalbl" for="${field.id}">Datum knjizenja dokumenta</label>
+				<label id="datumKnjizenjalbl" for="${field.id}">Datum knjizenja dokumenta (dd-MM-yyyy)</label>
 				<input type="text" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
@@ -109,11 +115,13 @@ function sync(item){
 			<p>
 			#{field 'statusDokumenta'}
 				<label id="statusDokumentalbl" for="${field.id}">Status dokumenta</label>
-				<select name="${field.name}" id="${field.id}">
-					<option value="F">Fakturisano</option>
+				<select name="${field.name}" id="${field.id}" disabled="true">
+					<option value="F">Formiranje</option>
 					<option value="P">Proknjizeno</option>
-					<option value="S">S</option>
+					<option value="S">Stornirano</option>
 				</select>
+				<button id="proknjiziButton" onclick="">Proknjizi</button>
+				<button id="stornirajButton" onclick="">Storniraj</button>
 			#{/}
 			</p>
 			
@@ -172,22 +180,76 @@ function sync(item){
 				<td class="sd_roba">${ stavka.roba.naziv }</td>
 				<td style="visibility: hidden; max-width: 0px" class = "sd_id">${stavka.id}</td>
 				<td style="visibility: hidden; max-width: 0px" class = "sd_amk_id">${stavka.analitikaMagacinskeKartice.id}</td>
-				<td style="visibility: hidden; max-width: 0px" class = "pd_r_id">${stavka.roba.id}</td>
+				<td style="visibility: hidden; max-width: 0px" class = "sd_r_id">${stavka.roba.id}</td>
+				<td style="visibility: hidden; max-width: 0px" class = "sd_pd_id">${stavka.prometniDokument.id}</td>
 			</tr>
 			#{/list}
 		</table>
+	
 		
 	<form>
 	
-	
-	
+	<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'kolicina'}
+				<label id="kolicinalbl" for="${field.id}">Kolicina</label>
+				<input type="number" min="1" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'cena'}
+				<label id="cenalbl" for="${field.id}">Cena</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'vrednost'}
+				<label id="vrednostlbl" for="${field.id}">Vrednost</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'analitikaMagacinskeKartice'}
+				<label id="analitikeRobneKarticelbl" for="${field.id}">Analitike magacinske kartice</label>
+				<select name="${field.name}" id="${field.id}">
+					#{list items:analitike, as:'analitika'}
+						<option value="${analitika.id}">${analitika.redniBroj}</option>
+					#{/list}
+				</select>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'roba'}
+				<label id="robalbl" for="${field.id}">Roba</label>
+				<select name="${field.name}" id="${field.id}">
+					#{list items:robe, as:'roba'}
+						<option value="${roba.id}">${roba.naziv}</option>
+					#{/list}
+				</select>
+			#{/}
+			</p>
+			
+			#{field 'prometniDokument'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+
+		</div>
 	
 	<!--  buttons  -->
 		<div>
 			<input type="reset" value="Resetuj formu"/>
-			<button onclick="setFormAction('@{Prometnadokumenta.create()}')">Dodaj</button>
-			<button onclick="setFormAction('@{Prometnadokumenta.update()}')">Izmeni</button>
-			<button onclick="checkForDeletion('@{Prometnadokumenta.delete()}','Unisti dokumenta?')">Obrisi</button>
+			<button onclick="setFormAction('@{Stavkedokumenta.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Stavkedokumenta.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Stavkedokumenta.delete()}','Unisti dokumenta?')">Obrisi</button>
 		</div>	
 	</form>
 	

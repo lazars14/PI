@@ -15,7 +15,14 @@
 <script>
 function sync(item){
     godina = item.find(".pg_godina").html()
+    
     zakljucena = (item.find(".pg_zakljucena").html() == 'true') ? true : false;
+    if(zakljucena == true){
+    	document.getElementById("zakljucivanje").disabled = true;	
+    } else {
+    	document.getElementById("zakljucivanje").disabled = false;
+    }
+    
     preduzece = item.find(".pg_p_id").html()
 	id = item.find(".pg_id").html()
     $("#godina").val(godina);
@@ -64,7 +71,8 @@ function sync(item){
 			<p>
 			#{field 'zakljucena'}
 				<label id="zakljucenalbl" for="${field.id}">Zakljucena</label>
-				<input type="checkbox" name="${field.name}" id="${field.id}"/>
+				<input type="checkbox" name="${field.name}" id="${field.id}" disabled="true"/>
+				<button id="zakljucivanje" onclick="">Zakljuci</button>
 			#{/}
 			</p>
 
