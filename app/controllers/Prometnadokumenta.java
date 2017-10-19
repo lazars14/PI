@@ -6,6 +6,7 @@ import java.util.List;
 import models.Magacin;
 import models.Poslovnipartner;
 import models.Prometnidokument;
+import models.Stavkadokumenta;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -60,5 +61,14 @@ public class Prometnadokumenta extends Controller{
 	public static void filter(){
 		
 	}
-
+	
+	public static void readAll(Long docId) {
+		List<Prometnidokument> dokumenti = Prometnidokument.findAll();
+		List<Magacin> magacini = Magacin.findAll();
+		List<Poslovnipartner> partneri = Poslovnipartner.findAll();
+		List<Stavkadokumenta> stavke = Stavkadokumenta.find("byPrometniDokument", docId).fetch();
+		
+		render(dokumenti, magacini, partneri, stavke);
+	}
+	
 }

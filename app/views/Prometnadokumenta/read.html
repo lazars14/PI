@@ -48,19 +48,23 @@ function sync(item){
 			<th>Magacin</th>
 			<th>Poslovni partner</th>
 		</tr>
-		#{list items:poslovnadokumenta, as:'poslovnidokument'}
+		#{list items:dokumenti, as:'dokument'}
 		<tr>
-			<td class="pd_vrstaDokumenta">${ poslovnidokument.vrstaDokumenta }</td>
-			<td class="pd_redniBrojDokumenta">${ poslovnidokument.redniBrojDokumenta }</td>
-			<td class="pd_datumFormiranja">${ poslovnidokument.datumFormiranja }</td>
-			<td class="pd_datumKnjizenja">${ poslovnidokument.datumKnjizenja }</td>
-			<td class="pd_statusDokumenta">${ poslovnidokument.statusDokumenta }</td>
-			<td class="pd_magacin">${ poslovnidokument.magacin }</td>
-			<td class="pd_poslovniPartner">${ poslovnidokument.poslovniPartner }</td>
-			<td style="visibility: hidden; max-width: 0px" class = "pd_id">${poslovnidokumentr.id}</td>
+			<td class="pd_vrstaDokumenta">${ dokument.vrstaDokumenta }</td>
+			<td class="pd_redniBrojDokumenta">${ dokument.redniBrojDokumenta }</td>
+			<td class="pd_datumFormiranja">${ dokument.datumFormiranja }</td>
+			<td class="pd_datumKnjizenja">${ dokument.datumKnjizenja }</td>
+			<td class="pd_statusDokumenta">${ dokument.statusDokumenta }</td>
+			<td class="pd_magacin">${ dokument.magacin.naziv }</td>
+			<td class="pd_poslovniPartner">${ dokument.poslovniPartner.nazivPartnera }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "pd_id">${dokument.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "pd_m_id">${dokument.magacin.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "pd_pp_id">${dokument.poslovniPartner.id}</td>
 		</tr>
 		#{/list}
 	</table>
+	
+	<br/>
 	
 	<form id="crud" name="crud" action="" method="post" onsubmit="searchPoslovnadokumenta()">
 	
@@ -134,13 +138,6 @@ function sync(item){
 				</select>
 			#{/}
 			</p>
-			
-			<p>
-			#{field 'stavke'}
-				<label for = "${field.id}">Stavke</label>
-				<!-- za modal, stavke u tabeli i panel za editovanje -->
-			#{/}
-			</p>
 				
 		</div>
 		
@@ -153,6 +150,46 @@ function sync(item){
 		</div>
 		
 	</form>
-
+	
+	<br/>
+	
+	<h3>Stavke</h3>
+	
+	<table id="sub-entity" border=1>
+			<tr class="header">
+				<th>Kolicina</th>
+				<th>Cena</th>
+				<th>Vrednost</th>
+				<th>Analitika</th>
+				<th>Roba</th>
+			</tr>
+			#{list items:stavke, as:'stavka'}
+			<tr>
+				<td class="sd_kolicina">${ stavka.kolicina }</td>
+				<td class="sd_cena">${ stavka.cena }</td>
+				<td class="sd_vrednost">${ stavka.vrednost }</td>
+				<td class="sd_analitika">${ stavka.analitikaMagacinskeKartice.redniBroj }</td>
+				<td class="sd_roba">${ stavka.roba.naziv }</td>
+				<td style="visibility: hidden; max-width: 0px" class = "sd_id">${stavka.id}</td>
+				<td style="visibility: hidden; max-width: 0px" class = "sd_amk_id">${stavka.analitikaMagacinskeKartice.id}</td>
+				<td style="visibility: hidden; max-width: 0px" class = "pd_r_id">${stavka.roba.id}</td>
+			</tr>
+			#{/list}
+		</table>
+		
+	<form>
+	
+	
+	
+	
+	<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Prometnadokumenta.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Prometnadokumenta.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Prometnadokumenta.delete()}','Unisti dokumenta?')">Obrisi</button>
+		</div>	
+	</form>
+	
 </body>
 </html>
