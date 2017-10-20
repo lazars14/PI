@@ -31,12 +31,21 @@ function sync(item){
     $("#magacin").val(magacin);
     $("#poslovniPartner").val(poslovniPartner);
     $("#id").val(id);
+    
+    var x = document.getElementById("sub-entity").rows.length;
+    var today = new Date();
+    var datFormiranjaDate = convertDate(datumFormiranja);
+    if(statusDokumenta != "F" && x > 1 && today < datFormiranjaDate && datumKnjizenja != "null"){
+    	document.getElementById("zakljucivanje").disabled = true;
+    }
 }
 
-function checkStatus(){
-	if(document.getElementById("statusDokumenta") != "F"){
-		document.getElementById("proknjizavanje").disabled = true;
-	}
+function convertDate(dateString){
+	// "Dec 25, 1995"
+	// dd-MM-yyyy
+	var today = new Date();
+	var year = today.getFullYear();
+	
 }
 
 </script>

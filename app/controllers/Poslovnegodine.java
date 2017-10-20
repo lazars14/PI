@@ -20,9 +20,9 @@ public class Poslovnegodine extends Controller {
 		render(poslovneGodine, preduzeca);
 	}
 	
-	public static void create(int godina, boolean zakljucena, Long preduzece){
+	public static void create(int godina, Long preduzece){
 		Preduzece p = Preduzece.findById(preduzece);
-		Poslovnagodina pg = new Poslovnagodina(godina, zakljucena, p);
+		Poslovnagodina pg = new Poslovnagodina(godina, false, p);
 		pg.save();
 		
 		read();
@@ -49,5 +49,10 @@ public class Poslovnegodine extends Controller {
 	public static void filter(){
 		
 	}
-
+	
+	public static void zakljucivanje(Long id){
+		Poslovnagodina pg = Poslovnagodina.findById(id);
+		
+		
+	}
 }
