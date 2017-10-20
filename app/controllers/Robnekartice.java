@@ -22,16 +22,14 @@ public class Robnekartice extends Controller{
     	render(robneKartice, robe, magacini, poslovneGodine);
 	}
 
-	public static void create(String cena, int pocStanjeKol, String pocStanjeVr, int prometUlazaKol, String prometUlazaVr,
-			int prometIzlazaKol, String prometIzlazaVr, int ukKol, String ukVr, Long poslovnaGodina, Long magacin,
-			Long roba) {
+	public static void create(String cena, int pocStanjeKol, String pocStanjeVr, int ukKol, String ukVr, Long poslovnaGodina,
+			Long magacin, Long roba) {
 		
 		Poslovnagodina pGod = Poslovnagodina.findById(poslovnaGodina);
 		Magacin m = Magacin.findById(magacin);
 		Roba r = Roba.findById(roba);
 		Robnakartica robnakartica = new Robnakartica(Double.valueOf(cena), pocStanjeKol, Double.valueOf(pocStanjeVr),
-				prometUlazaKol, Double.valueOf(prometUlazaVr), prometIzlazaKol, Double.valueOf(prometIzlazaVr), ukKol,
-				Double.valueOf(ukVr), pGod, m, r);
+				0, Double.valueOf(0), 0, Double.valueOf(0), ukKol, Double.valueOf(ukVr), pGod, m, r);
 		robnakartica.save();
 		
 		read();

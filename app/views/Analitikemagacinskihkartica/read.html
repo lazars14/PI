@@ -1,10 +1,188 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables2.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
+<title>Analitike magacinskih kartica</title>
+
 </head>
+
+<script>
+
+function sync(item){
+	redniBroj = item.find(".a_redniBroj").html()
+    vrstaPrometa = item.find(".a_vrstaPrometa").html()
+	smer = item.find(".a_smer").html()
+	kolicina = item.find(".a_kolicina").html()
+	cena = item.find(".a_cena").html()
+	vrednost = item.find(".a_vrednost").html()
+	robnaKartica = item.find(".a_rk_id").html()
+	id = item.find(".a_id").html()
+    $("#redniBroj").val(redniBroj);
+    $("#vrstaPrometa").val(vrstaPrometa);
+    $("#smer").val(smer);
+    $("#kolicina").val(kolicina);
+    $("#cena").val(cena);
+    $("#vrednost").val(vrednost);
+    $("#robnaKartica").val(robnaKartica);
+    $("#id").val(id);
+    
+    //setKarticaSelected(robnaKartica);
+}
+
+function setKarticaSelected(id){
+	
+}
+
+</script>
+
 <body>
+	<h1>Analitike magacinskih kartica</h1>
+	
+	<table id="entities" border=1>
+		<tr class="header">
+			<th>redni broj</th>
+			<th>vrsta prometa</th>
+			<th>smer</th>
+			<th>kolicina</th>
+			<th>cena</th>
+			<th>vrednost</th>
+			<th>robna kartica</th>
+		</tr>
+		#{list items:analitike, as:'analitika'}
+		<tr>
+			<td class="a_redniBroj">${ analitika.redniBroj}</td>
+			<td class="a_vrstaPrometa">${ analitika.vrstaPrometa }</td>
+			<td class="a_smer">${ analitika.smer }</td>
+			<td class="a_kolicina">${ analitika.kolicina }</td>
+			<td class="a_cena">${ analitika.cena }</td>
+			<td class="a_vrednost">${ analitika.vrednost }</td>
+			<td class="a_robnaKartica">to do</td>
+			<td style="visibility: hidden; max-width: 0px" class = "a_id">${ analitika.id }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "a_rk_id">${ analitika.robnaKartica.id }</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<form id="crud" name="crud" action="" method="post">
+	
+		<!--  panel  -->
+		<div>
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'redniBroj'}
+				<label id="redniBrojlbl" for="${field.id}">Redni broj</label>
+				<input type="text" disabled="disabled" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'vrstaPrometa'}
+				<label id="vrstaPrometalbl" for="${field.id}">Vrsta prometa</label>
+				<input type="text" maxlength="100" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'smer'}
+				<label id="smerlbl" for="${field.id}">Smer</label>
+				<select name="${field.name}" id="${field.id}">
+					<option value="U">Ulaz</option>
+					<option value="I">Izlaz</option>
+				</select>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'kolicina'}
+				<label id="kolicinalbl" for="${field.id}">Kolicina</label>
+				<input type="number" min="1" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'cena'}
+				<label id="cenalbl" for="${field.id}">Cena</label>
+				<input type="number" min="1" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'vrednost'}
+				<label id="vrednostlbl" for="${field.id}">Vrednost</label>
+				<input type="number" min="1" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'robnaKartica'}
+				<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<br/>
+			
+			<h3>Robna kartica</h3>
+			
+			<table id="kartice" border=1>
+				<tr class="header">
+					<th>cena</th>
+					<th>pocetno stanje kolicina</th>
+					<th>pocetno stanje vrednosti</th>
+					<th>promet ulaza kolicine</th>
+					<th>promet ulaza vrednosti</th>
+					<th>promet izlaza kolicine</th>
+					<th>promet izlaza vrednosti</th>
+					<th>ukupna kolicina</th>
+					<th>ukupna vrednost</th>
+					<th>poslovna godina</th>
+					<th>magacin</th>
+					<th>roba</th>
+				</tr>
+				#{list items:robneKartice, as:'kartica'}
+				<tr>
+					<td class="rk_cena">${ kartica.cena }</td>
+					<td class="rk_pocStanjeKol">${ kartica.pocStanjeKol }</td>
+					<td class="rk_pocStanjeVr">${ kartica.pocStanjeVrednosti }</td>
+					<td class="rk_prometUlazaKol">${ kartica.prometUlazaKol }</td>
+					<td class="rk_prometUlazaVr">${ kartica.prometUlazaVr }</td>
+					<td class="rk_prometIzlazaKol">${ kartica.prometIzlazaKol }</td>
+					<td class="rk_prometIzlazaVr">${ kartica.prometIzlazaVr }</td>
+					<td class="rk_ukKol">${ kartica.ukKol }</td>
+					<td class="rk_ukVr">${ kartica.ukVrednost }</td>
+					<td class="rk_poslovnaGodina">${ kartica.poslovnaGodina.godina }, ${ kartica.poslovnaGodina.preduzece.naziv}</td>
+					<td class="rk_magacin">${ kartica.magacin.naziv }</td>
+					<td class="rk_roba">${ kartica.roba.naziv }</td>
+					<td style="visibility: hidden; max-width: 0px" class = "rk_id">${kartica.id}</td>
+					<td style="visibility: hidden; max-width: 0px" class = "rk_pg_id">${kartica.poslovnaGodina.id}</td>
+					<td style="visibility: hidden; max-width: 0px" class = "rk_m_id">${kartica.magacin.id}</td>
+					<td style="visibility: hidden; max-width: 0px" class = "rk_r_id">${kartica.roba.id}</td>
+				</tr>
+				#{/list}
+			</table>
+				
+		</div>
+		
+		<br/>
+		<br/>
+		
+		<!--  buttons  -->
+		<div>
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Analitikemagacinskihkartica.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Analitikemagacinskihkartica.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Analitikemagacinskihkartica.delete()}','ovu karticu?')">Obrisi</button>
+		</div>
+		
+	</form>
 
 </body>
 </html>
