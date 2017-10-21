@@ -32,11 +32,25 @@ function sync(item){
     $("#robnaKartica").val(robnaKartica);
     $("#id").val(id);
     
-    //setKarticaSelected(robnaKartica);
+    alert(robnaKartica + " u sync metodi");
+    
+    setKarticaSelected(robnaKartica);
 }
 
 function setKarticaSelected(id){
-	
+	var table = document.getElementById("kartice");
+	for (var i = 0, row; row = table.rows[i]; i++) {
+		for (var j = 0, col; col = row.cells[j]; j++) {
+		     if(j == 12 && col.textContent == id){
+		    	 row.click();
+		     }
+		} 
+	}
+}
+
+function check(){
+	var text = document.getElementById("robnaKartica").textContent;
+	alert("id robne kartice pre submit-a: " + text);
 }
 
 </script>
@@ -52,7 +66,6 @@ function setKarticaSelected(id){
 			<th>kolicina</th>
 			<th>cena</th>
 			<th>vrednost</th>
-			<th>robna kartica</th>
 		</tr>
 		#{list items:analitike, as:'analitika'}
 		<tr>
@@ -62,14 +75,13 @@ function setKarticaSelected(id){
 			<td class="a_kolicina">${ analitika.kolicina }</td>
 			<td class="a_cena">${ analitika.cena }</td>
 			<td class="a_vrednost">${ analitika.vrednost }</td>
-			<td class="a_robnaKartica">to do</td>
 			<td style="visibility: hidden; max-width: 0px" class = "a_id">${ analitika.id }</td>
 			<td style="visibility: hidden; max-width: 0px" class = "a_rk_id">${ analitika.robnaKartica.id }</td>
 		</tr>
 		#{/list}
 	</table>
 	
-	<form id="crud" name="crud" action="" method="post">
+	<form id="crud" name="crud" action="" method="post" onsubmit="check()">
 	
 		<!--  panel  -->
 		<div>
@@ -80,7 +92,7 @@ function setKarticaSelected(id){
 			<p>
 			#{field 'redniBroj'}
 				<label id="redniBrojlbl" for="${field.id}">Redni broj</label>
-				<input type="text" disabled="disabled" name="${field.name}" id="${field.id}"/>
+				<input type="number" min="1" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
 			
@@ -181,6 +193,8 @@ function setKarticaSelected(id){
 			<button onclick="setFormAction('@{Analitikemagacinskihkartica.update()}')">Izmeni</button>
 			<button onclick="checkForDeletion('@{Analitikemagacinskihkartica.delete()}','ovu karticu?')">Obrisi</button>
 		</div>
+		
+		<a href="../../">Home</a>
 		
 	</form>
 

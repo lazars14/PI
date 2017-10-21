@@ -31,8 +31,9 @@ public class Analitikemagacinskihkartica extends Controller {
 	}
 
 	public static void update(Long id, Long redniBroj, String vrstaPrometa, String smer, Long kolicina,
-			Long cena, Long vrednost, Long robnaKarticaId){
-		Robnakartica robnaKarticaA = Robnakartica.findById(robnaKarticaId);
+			Long cena, Long vrednost, Long robnaKartica){
+		
+		Robnakartica rk = Robnakartica.findById(robnaKartica);
 		Analitikamagacinskekartice a = Analitikamagacinskekartice.findById(id);
 		a.redniBroj = Integer.parseInt(redniBroj.toString());
 		a.vrstaPrometa = vrstaPrometa;
@@ -40,7 +41,7 @@ public class Analitikemagacinskihkartica extends Controller {
 		a.kolicina = Integer.parseInt(kolicina.toString());
 		a.cena = Double.valueOf(cena);
 		a.vrednost = Double.valueOf(vrednost);
-		a.robnaKartica = robnaKarticaA;
+		a.robnaKartica = rk;
 		a.save();
 		
 		read();
