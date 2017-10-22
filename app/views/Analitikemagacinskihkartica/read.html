@@ -81,10 +81,13 @@ function check(){
 		#{/list}
 	</table>
 	
+	<br/>
+	
 	<form id="crud" name="crud" action="" method="post" onsubmit="check()">
 	
 		<!--  panel  -->
 		<div>
+			<div class="inputFields">
 			#{field 'id'}
 			<input type="hidden" name="${field.id}" id="${field.id}"/>
 			#{/}
@@ -140,6 +143,8 @@ function check(){
 			#{/}
 			</p>
 			
+			</div>
+			
 			<br/>
 			
 			<h3>Robna kartica</h3>
@@ -183,11 +188,8 @@ function check(){
 				
 		</div>
 		
-		<br/>
-		<br/>
-		
 		<!--  buttons  -->
-		<div>
+		<div class="buttons">
 			<input type="reset" value="Resetuj formu"/>
 			<button onclick="setFormAction('@{Analitikemagacinskihkartica.create()}')">Dodaj</button>
 			<button onclick="setFormAction('@{Analitikemagacinskihkartica.update()}')">Izmeni</button>

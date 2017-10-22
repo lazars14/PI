@@ -26,7 +26,7 @@ th{
 
 a{
 	text-decoration: none;
-	padding: 30px;
+	padding: 25px;
     text-align: center;
     display: inline-block;
     font-size: 25px;
@@ -34,4 +34,48 @@ a{
 
 a:hover{
 	color: red;
+}
+
+.panel {
+	margin: auto;
+}
+
+.panel label {
+	text-align: left;
+}
+
+table#kartice {
+	
+}
+
+.inputFields {
+	width: 42%;
+	margin: auto;
+	text-align: left;
+}
+
+.inputFields p select, input {
+	float: right;
+	width: 120px;
+}
+
+ul {
+	list-style-type: none;
+}
+
+input[type=reset] {
+	float: none;
+	margin-right: 30px;
+}
+
+.buttons {
+	margin-top: 30px;
+}
+
+button#zakljucivanje {
+	margin-left: 30px;
+}
+
+button#proknjiziButton {
+	margin-left: 30px;
 }

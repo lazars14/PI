@@ -85,6 +85,8 @@ function convertDate(dateString){
 	
 		<!--  panel  -->
 		<div>
+			<div class="inputFields">
+		
 			#{field 'id'}
 			<input type="hidden" name="${field.id}" id="${field.id}"/>
 			#{/}
@@ -109,14 +111,14 @@ function convertDate(dateString){
 			
 			<p>
 			#{field 'datumFormiranja'}
-				<label id="datumFormiranjalbl" for="${field.id}">Datum formiranja dokumenta (dd-MM-yyyy)</label>
+				<label id="datumFormiranjalbl" for="${field.id}">Datum formiranja (dd-MM-yyyy)</label>
 				<input type="text" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'datumKnjizenja'}
-				<label id="datumKnjizenjalbl" for="${field.id}">Datum knjizenja dokumenta (dd-MM-yyyy)</label>
+				<label id="datumKnjizenjalbl" for="${field.id}">Datum knjizenja (dd-MM-yyyy)</label>
 				<input type="text" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
@@ -129,8 +131,6 @@ function convertDate(dateString){
 					<option value="P">Proknjizeno</option>
 					<option value="S">Stornirano</option>
 				</select>
-				<button id="proknjiziButton" onclick="">Proknjizi</button>
-				<button id="stornirajButton" onclick="">Storniraj</button>
 			#{/}
 			</p>
 			
@@ -156,53 +156,57 @@ function convertDate(dateString){
 			#{/}
 			</p>
 				
+			</div>
+			
 		</div>
 		
 		<!--  buttons  -->
-		<div>
+		<div class="buttons">
 			<input type="reset" value="Resetuj formu"/>
 			<button onclick="setFormAction('@{Prometnadokumenta.create()}')">Dodaj</button>
 			<button onclick="setFormAction('@{Prometnadokumenta.update()}')">Izmeni</button>
 			<button onclick="checkForDeletion('@{Prometnadokumenta.delete()}','Unisti dokumenta?')">Obrisi</button>
+			<button id="proknjiziButton" onclick="">Proknjizi</button>
+			<button id="stornirajButton" onclick="">Storniraj</button>
 		</div>
 		
 	</form>
-<<<<<<< HEAD
-	<a href="../main.html">HOME</a>
-=======
 	
 	<br/>
 	
 	<h3>Stavke</h3>
 	
 	<table id="sub-entity" border=1>
-			<tr class="header">
-				<th>Kolicina</th>
-				<th>Cena</th>
-				<th>Vrednost</th>
-				<th>Analitika</th>
-				<th>Roba</th>
-			</tr>
-			#{list items:stavke, as:'stavka'}
-			<tr>
-				<td class="sd_kolicina">${ stavka.kolicina }</td>
-				<td class="sd_cena">${ stavka.cena }</td>
-				<td class="sd_vrednost">${ stavka.vrednost }</td>
-				<td class="sd_analitika">${ stavka.analitikaMagacinskeKartice.redniBroj }</td>
-				<td class="sd_roba">${ stavka.roba.naziv }</td>
-				<td style="visibility: hidden; max-width: 0px" class = "sd_id">${stavka.id}</td>
-				<td style="visibility: hidden; max-width: 0px" class = "sd_amk_id">${stavka.analitikaMagacinskeKartice.id}</td>
-				<td style="visibility: hidden; max-width: 0px" class = "sd_r_id">${stavka.roba.id}</td>
-				<td style="visibility: hidden; max-width: 0px" class = "sd_pd_id">${stavka.prometniDokument.id}</td>
-			</tr>
-			#{/list}
-		</table>
+		<tr class="header">
+			<th>Kolicina</th>
+			<th>Cena</th>
+			<th>Vrednost</th>
+			<th>Analitika</th>
+			<th>Roba</th>
+		</tr>
+		#{list items:stavke, as:'stavka'}
+		<tr>
+			<td class="sd_kolicina">${ stavka.kolicina }</td>
+			<td class="sd_cena">${ stavka.cena }</td>
+			<td class="sd_vrednost">${ stavka.vrednost }</td>
+			<td class="sd_analitika">${ stavka.analitikaMagacinskeKartice.redniBroj }</td>
+			<td class="sd_roba">${ stavka.roba.naziv }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "sd_id">${stavka.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "sd_amk_id">${stavka.analitikaMagacinskeKartice.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "sd_r_id">${stavka.roba.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "sd_pd_id">${stavka.prometniDokument.id}</td>
+		</tr>
+		#{/list}
+	</table>
 	
+	<br/>
 		
 	<form>
 	
 	<!--  panel  -->
 		<div>
+			<div class="inputFields">
+			
 			#{field 'id'}
 			<input type="hidden" name="${field.id}" id="${field.id}"/>
 			#{/}
@@ -230,7 +234,7 @@ function convertDate(dateString){
 			
 			<p>
 			#{field 'analitikaMagacinskeKartice'}
-				<label id="analitikeRobneKarticelbl" for="${field.id}">Analitike magacinske kartice</label>
+				<label id="analitikeRobneKarticelbl" for="${field.id}">Analitike mag. kartice</label>
 				<select name="${field.name}" id="${field.id}">
 					#{list items:analitike, as:'analitika'}
 						<option value="${analitika.id}">${analitika.redniBroj}</option>
@@ -253,17 +257,21 @@ function convertDate(dateString){
 			#{field 'prometniDokument'}
 			<input type="hidden" name="${field.id}" id="${field.id}"/>
 			#{/}
-
+			
+			</div>
+			
 		</div>
 	
 	<!--  buttons  -->
-		<div>
+		<div class="buttons">
 			<input type="reset" value="Resetuj formu"/>
 			<button onclick="setFormAction('@{Stavkedokumenta.create()}')">Dodaj</button>
 			<button onclick="setFormAction('@{Stavkedokumenta.update()}')">Izmeni</button>
 			<button onclick="checkForDeletion('@{Stavkedokumenta.delete()}','Unisti dokumenta?')">Obrisi</button>
 		</div>	
 	</form>
+	
 	<a href="../../">Home</a>
+
 </body>
 </html>

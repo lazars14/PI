@@ -53,10 +53,14 @@ function sync(item){
 		#{/list}
 	</table>
 	
+	<br/>
+	
 	<form id="crud" name="crud" action="" method="post" onsubmit="searchPoslovnegodine()">
 	
 		<!--  panel  -->
 		<div>
+			<div class="inputFields">
+			
 			#{field 'id'}
 			<input type="hidden" name="${field.id}" id="${field.id}"/>
 			#{/}
@@ -72,7 +76,6 @@ function sync(item){
 			#{field 'zakljucena'}
 				<label id="zakljucenalbl" for="${field.id}">Zakljucena</label>
 				<input type="checkbox" name="${field.name}" id="${field.id}" disabled="true"/>
-				<button id="zakljucivanje" onclick="">Zakljuci</button>
 			#{/}
 			</p>
 
@@ -86,15 +89,18 @@ function sync(item){
 				</select>
 			#{/}
 			</p>
+			
+			</div>
 				
 		</div>
 		
 		<!--  buttons  -->
-		<div>
+		<div class="buttons">
 			<input type="reset" value="Resetuj formu"/>
 			<button onclick="setFormAction('@{Poslovnegodine.create()}')">Dodaj</button>
 			<button onclick="setFormAction('@{Poslovnegodine.update()}')">Izmeni</button>
 			<button onclick="checkForDeletion('@{Poslovnegodine.delete()}','Izbrisi poslovnu godinu?')">Obrisi</button>
+			<button id="zakljucivanje" onclick="">Zakljuci</button>
 		</div>
 		
 	</form>

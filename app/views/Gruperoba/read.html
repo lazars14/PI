@@ -43,10 +43,14 @@ function sync(item){
 		#{/list}
 	</table>
 	
+	<br/>
+	
 	<form id="crud" name="crud" action="" method="post">
 	
 		<!--  panel  -->
 		<div>
+			<div class="inputFields">
+			
 			#{field 'id'}
 			<input type="hidden" name="${field.id}" id="${field.id}"/>
 			#{/}
@@ -68,11 +72,13 @@ function sync(item){
 				</select>
 			#{/}
 			</p>
-				
+			
+			</div>
+			
 		</div>
 		
 		<!--  buttons  -->
-		<div>
+		<div class="buttons">
 			<input type="reset" value="Resetuj formu"/>
 			<button onclick="setFormAction('@{Gruperoba.create()}')">Dodaj</button>
 			<button onclick="setFormAction('@{Gruperoba.update()}')">Izmeni</button>
