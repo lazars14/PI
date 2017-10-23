@@ -3,6 +3,7 @@ package controllers;
 import java.math.BigDecimal;
 import java.util.List;
 
+import helpers.MaxHelper;
 import models.Analitikamagacinskekartice;
 import models.Robnakartica;
 import play.data.validation.Required;
@@ -19,11 +20,11 @@ public class Analitikemagacinskihkartica extends Controller {
         render(analitike,robneKartice);
 	}
 	
-	public static void create(Long redniBroj, String vrstaPrometa, String smer, Long kolicina,
+	public static void create(String vrstaPrometa, String smer, Long kolicina,
 			Long cena, Long vrednost, Long robnaKartica){
-		
+		MaxHelper maxHelper = new MaxHelper();
 		Robnakartica rk = Robnakartica.findById(robnaKartica);
-		Analitikamagacinskekartice a = new Analitikamagacinskekartice(Integer.parseInt(redniBroj.toString()), vrstaPrometa,
+		Analitikamagacinskekartice a = new Analitikamagacinskekartice(maxHelper.getMaxPlusOneId("analitika"), vrstaPrometa,
 				smer.charAt(0), Integer.parseInt(kolicina.toString()), Double.valueOf(cena), Double.valueOf(vrednost), rk);
 		a.save();
 		

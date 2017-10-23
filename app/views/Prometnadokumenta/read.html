@@ -4,7 +4,7 @@
 <head>
 <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
 <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
-<script src="@{'/public/javascripts/tables.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables3.js'}" type="text/javascript" charset="UTF-8"></script>
 <script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
 <meta charset="UTF-8">
 
@@ -18,11 +18,11 @@ function sync(item){
     vrstaDokumenta = item.find(".pd_vrstaDokumenta").html()
     redniBrojDokumenta = item.find(".pd_redniBrojDokumenta").html()
     datumFormiranja = item.find(".pd_datumFormiranja").html()
-	datumKnjizenja = item.find(".pd_datumKnjizenja").html
+	datumKnjizenja = item.find(".pd_datumKnjizenja").html()
 	statusDokumenta = item.find(".pd_statusDokumenta").html()
-	magacin = item.find(".pd_magacin").html
-	poslovniPartner = item.find(".pd_magacin").html()
-	id = item.find(".pp_id").html()
+	magacin = item.find(".pd_m_id").html()
+	poslovniPartner = item.find(".pd_pp_id").html()
+	id = item.find(".pd_id").html()
     $("#vrstaDokumenta").val(vrstaDokumenta);
     $("#redniBrojDokumenta").val(redniBrojDokumenta);
     $("#datumFormiranja").val(datumFormiranja);
@@ -32,25 +32,47 @@ function sync(item){
     $("#poslovniPartner").val(poslovniPartner);
     $("#id").val(id);
     
-    var x = document.getElementById("sub-entity").rows.length;
-    var today = new Date();
-    var datFormiranjaDate = convertDate(datumFormiranja);
-    if(statusDokumenta != "F" && x > 1 && today < datFormiranjaDate && datumKnjizenja != "null"){
-    	document.getElementById("zakljucivanje").disabled = true;
+    if(statusDokumenta == "F"){
+    	document.getElementById("proknjiziButton").disabled = false;
+    	document.getElementById("stornirajButton").disabled = true;
+    } else if(statusDokumenta == "P"){
+    	document.getElementById("stornirajButton").disabled = false;
+    	if(x < 2){
+    		document.getElementById("proknjiziButton").disabled = true;
+    	} else {
+    		document.getElementById("proknjiziButton").disabled = false;
+    	}
+    } else if(statusDokumenta == "S"){
+    	document.getElementById("proknjiziButton").disabled = true;
+    	document.getElementById("stornirajButton").disabled = true;
     }
+    
+    document.getElementById("vrstaDokumenta").disabled = true;
 }
 
-function convertDate(dateString){
-	// "Dec 25, 1995"
-	// dd-MM-yyyy
-	var today = new Date();
-	var year = today.getFullYear();
-	
+function undisable(){
+	document.getElementById("vrstaDokumenta").disabled = false;
+	document.getElementById("redniBroj").disabled = false;
+	document.getElementById("statusDokumenta").disabled = false;
+	document.getElementById("magacinDva").disabled = false;
+}
+
+function reactDocumentType(){
+	var text = document.getElementById("vrstaDokumenta").value;
+	if(text == "Mm"){
+		document.getElementById("magacinDva").disabled = false;
+	} else{
+		document.getElementById("magacinDva").disabled = true;
+	}
 }
 
 </script>
 
+
+
 <body>
+	<input type="hidden" id="docId" name="docId"/>
+
 	<h1>Poslovna dokumenta</h1>
 	
 	<table id="entities" border=1>
@@ -81,7 +103,7 @@ function convertDate(dateString){
 	
 	<br/>
 	
-	<form id="crud" name="crud" action="" method="post" onsubmit="searchPoslovnadokumenta()">
+	<form id="crud" name="crud" action="" method="post" onsubmit="undisable()">
 	
 		<!--  panel  -->
 		<div>
@@ -94,7 +116,7 @@ function convertDate(dateString){
 			<p>
 			#{field 'vrstaDokumenta'}
 				<label id="vrstaDokumentalbl" for="${field.id}">Vrsta dokumenta</label>
-				<select name="${field.name}" id="${field.id}">
+				<select name="${field.name}" id="${field.id}" onchange="reactDocumentType()">
 					<option value="Pr">Prijemnica</option>
 					<option value="Ot">Otpremnica</option>
 					<option value="Mm">Medju-magacinski</option>
@@ -105,20 +127,20 @@ function convertDate(dateString){
 			<p>
 			#{field 'redniBrojDokumenta'}
 				<label id="redniBrojDokumentalbl" for="${field.id}">Redni broj dokumenta</label>
-				<input type="number" min="1" name="${field.name}" id="${field.id}" disabled="true"/>
+				<input type="number" min="1" name="${field.name}" id="${field.id}" disabled/>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'datumFormiranja'}
-				<label id="datumFormiranjalbl" for="${field.id}">Datum formiranja (dd-MM-yyyy)</label>
+				<label id="datumFormiranjalbl" for="${field.id}">Formiranje (yyyy-mm-dd)</label>
 				<input type="text" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
 			
 			<p>
 			#{field 'datumKnjizenja'}
-				<label id="datumKnjizenjalbl" for="${field.id}">Datum knjizenja (dd-MM-yyyy)</label>
+				<label id="datumKnjizenjalbl" for="${field.id}">Knjizenje (yyyy-mm-dd)</label>
 				<input type="text" name="${field.name}" id="${field.id}"/>
 			#{/}
 			</p>
@@ -126,7 +148,7 @@ function convertDate(dateString){
 			<p>
 			#{field 'statusDokumenta'}
 				<label id="statusDokumentalbl" for="${field.id}">Status dokumenta</label>
-				<select name="${field.name}" id="${field.id}" disabled="true">
+				<select name="${field.name}" id="${field.id}" disabled>
 					<option value="F">Formiranje</option>
 					<option value="P">Proknjizeno</option>
 					<option value="S">Stornirano</option>
@@ -138,6 +160,17 @@ function convertDate(dateString){
 			#{field 'magacin'}
 				<label for = "${field.id}">Magacin</label>
 				<select name = "${field.name}" id = "${field.id}"/>
+				#{list items:magacini, as:'magacin'}
+				<option value = "${magacin.id}">${magacin.naziv}</option>
+				#{/list}
+				</select>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'magacinDva'}
+				<label for = "${field.id}">Magacin dva</label>
+				<select name = "${field.name}" id = "${field.id}" onchange="reactMagacin()"/>
 				#{list items:magacini, as:'magacin'}
 				<option value = "${magacin.id}">${magacin.naziv}</option>
 				#{/list}
@@ -166,110 +199,15 @@ function convertDate(dateString){
 			<button onclick="setFormAction('@{Prometnadokumenta.create()}')">Dodaj</button>
 			<button onclick="setFormAction('@{Prometnadokumenta.update()}')">Izmeni</button>
 			<button onclick="checkForDeletion('@{Prometnadokumenta.delete()}','Unisti dokumenta?')">Obrisi</button>
-			<button id="proknjiziButton" onclick="">Proknjizi</button>
-			<button id="stornirajButton" onclick="">Storniraj</button>
+			<!-- <button id="proknjiziButton" onclick="setFormAction('@{Prometnadokumenta.proknjizi()}')">Proknjizi</button>
+			<button id="stornirajButton" onclick="setFormAction('@{Prometnadokumenta.storniraj()}')">Storniraj</button> -->
 		</div>
 		
 	</form>
 	
 	<br/>
 	
-	<h3>Stavke</h3>
-	
-	<table id="sub-entity" border=1>
-		<tr class="header">
-			<th>Kolicina</th>
-			<th>Cena</th>
-			<th>Vrednost</th>
-			<th>Analitika</th>
-			<th>Roba</th>
-		</tr>
-		#{list items:stavke, as:'stavka'}
-		<tr>
-			<td class="sd_kolicina">${ stavka.kolicina }</td>
-			<td class="sd_cena">${ stavka.cena }</td>
-			<td class="sd_vrednost">${ stavka.vrednost }</td>
-			<td class="sd_analitika">${ stavka.analitikaMagacinskeKartice.redniBroj }</td>
-			<td class="sd_roba">${ stavka.roba.naziv }</td>
-			<td style="visibility: hidden; max-width: 0px" class = "sd_id">${stavka.id}</td>
-			<td style="visibility: hidden; max-width: 0px" class = "sd_amk_id">${stavka.analitikaMagacinskeKartice.id}</td>
-			<td style="visibility: hidden; max-width: 0px" class = "sd_r_id">${stavka.roba.id}</td>
-			<td style="visibility: hidden; max-width: 0px" class = "sd_pd_id">${stavka.prometniDokument.id}</td>
-		</tr>
-		#{/list}
-	</table>
-	
-	<br/>
-		
-	<form>
-	
-	<!--  panel  -->
-		<div>
-			<div class="inputFields">
-			
-			#{field 'id'}
-			<input type="hidden" name="${field.id}" id="${field.id}"/>
-			#{/}
-				
-			<p>
-			#{field 'kolicina'}
-				<label id="kolicinalbl" for="${field.id}">Kolicina</label>
-				<input type="number" min="1" name="${field.name}" id="${field.id}"/>
-			#{/}
-			</p>
-			
-			<p>
-			#{field 'cena'}
-				<label id="cenalbl" for="${field.id}">Cena</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
-			#{/}
-			</p>
-			
-			<p>
-			#{field 'vrednost'}
-				<label id="vrednostlbl" for="${field.id}">Vrednost</label>
-				<input type="text" name="${field.name}" id="${field.id}"/>
-			#{/}
-			</p>
-			
-			<p>
-			#{field 'analitikaMagacinskeKartice'}
-				<label id="analitikeRobneKarticelbl" for="${field.id}">Analitike mag. kartice</label>
-				<select name="${field.name}" id="${field.id}">
-					#{list items:analitike, as:'analitika'}
-						<option value="${analitika.id}">${analitika.redniBroj}</option>
-					#{/list}
-				</select>
-			#{/}
-			</p>
-			
-			<p>
-			#{field 'roba'}
-				<label id="robalbl" for="${field.id}">Roba</label>
-				<select name="${field.name}" id="${field.id}">
-					#{list items:robe, as:'roba'}
-						<option value="${roba.id}">${roba.naziv}</option>
-					#{/list}
-				</select>
-			#{/}
-			</p>
-			
-			#{field 'prometniDokument'}
-			<input type="hidden" name="${field.id}" id="${field.id}"/>
-			#{/}
-			
-			</div>
-			
-		</div>
-	
-	<!--  buttons  -->
-		<div class="buttons">
-			<input type="reset" value="Resetuj formu"/>
-			<button onclick="setFormAction('@{Stavkedokumenta.create()}')">Dodaj</button>
-			<button onclick="setFormAction('@{Stavkedokumenta.update()}')">Izmeni</button>
-			<button onclick="checkForDeletion('@{Stavkedokumenta.delete()}','Unisti dokumenta?')">Obrisi</button>
-		</div>	
-	</form>
+</form>
 	
 	<a href="../../">Home</a>
 

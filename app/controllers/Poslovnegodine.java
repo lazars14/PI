@@ -3,6 +3,7 @@ package controllers;
 import java.util.Date;
 import java.util.List;
 
+import helpers.ZakljucivanjeHelper;
 import models.Poslovnagodina;
 import models.Preduzece;
 import play.mvc.Controller;
@@ -53,6 +54,10 @@ public class Poslovnegodine extends Controller {
 	public static void zakljucivanje(Long id){
 		Poslovnagodina pg = Poslovnagodina.findById(id);
 		
+		ZakljucivanjeHelper zh = new ZakljucivanjeHelper();
 		
+		if(zh.checkYear(pg)){
+			
+		}
 	}
 }

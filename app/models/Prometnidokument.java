@@ -33,10 +33,9 @@ public class Prometnidokument extends Model{
     
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-   
     public Date datumFormiranja;
-    @Column(name = "datumKnjizenja")
     
+    @Column(name = "datumKnjizenja")
     @Temporal(TemporalType.DATE)
     public Date datumKnjizenja;
     

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/tables.js'}" type="text/javascript" charset="UTF-8"></script>
+<script src="@{'/public/javascripts/forms.js'}" type="text/javascript" charset="UTF-8"></script>
+<meta charset="UTF-8">
+
+<title>Stavka dokumenta</title>
+
+</head>
+
+<script>
+
+function sync(item){
+	kolicina = item.find(".sd_kolicina").html()
+    cena = item.find(".sd_cena").html()
+    vrednost = item.find(".sd_vrednost").html()
+	analitika = item.find(".sd_amk_id").html()
+	roba = item.find(".sd_r_id").html()
+	prometniDokument = item.find(".sd_pd_id").html()
+	id = item.find(".sd_id").html()
+    $("#kolicina").val(kolicina);
+    $("#cena").val(cena);
+    $("#vrednost").val(vrednost);
+    $("#analitika").val(analitika);
+    $("#roba").val(roba);
+    $("#prometniDokument").val(prometniDokument);
+    $("#id").val(id);
+}
+
+</script>
+
+<body>
+	<h3>Stavke</h3>
+	
+	<table id="entities" border=1>
+		<tr class="header">
+			<th>Kolicina</th>
+			<th>Cena</th>
+			<th>Vrednost</th>
+			<th>Analitika</th>
+			<th>Roba</th>
+		</tr>
+		#{list items:stavke, as:'stavka'}
+		<tr>
+			<td class="sd_kolicina">${ stavka.kolicina }</td>
+			<td class="sd_cena">${ stavka.cena }</td>
+			<td class="sd_vrednost">${ stavka.vrednost }</td>
+			<td class="sd_analitika">${ stavka.analitikaMagacinskeKartice.redniBroj }</td>
+			<td class="sd_roba">${ stavka.roba.naziv }</td>
+			<td style="visibility: hidden; max-width: 0px" class = "sd_id">${stavka.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "sd_amk_id">${stavka.analitikaMagacinskeKartice.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "sd_r_id">${stavka.roba.id}</td>
+			<td style="visibility: hidden; max-width: 0px" class = "sd_pd_id">${stavka.prometniDokument.id}</td>
+		</tr>
+		#{/list}
+	</table>
+	
+	<br/>
+		
+	<form id="crud" name="crud" action="" method="post">
+	
+	<!--  panel  -->
+		<div>
+			<div class="inputFields">
+			
+			#{field 'id'}
+			<input type="hidden" name="${field.id}" id="${field.id}"/>
+			#{/}
+				
+			<p>
+			#{field 'kolicina'}
+				<label id="kolicinalbl" for="${field.id}">Kolicina</label>
+				<input type="number" min="1" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'cena'}
+				<label id="cenalbl" for="${field.id}">Cena</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'vrednost'}
+				<label id="vrednostlbl" for="${field.id}">Vrednost</label>
+				<input type="text" name="${field.name}" id="${field.id}"/>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'analitika'}
+				<label id="analitikeRobneKarticelbl" for="${field.id}">Analitike mag. kartice</label>
+				<select name="${field.name}" id="${field.id}">
+					#{list items:analitike, as:'analitika'}
+						<option value="${analitika.id}">${analitika.redniBroj}</option>
+					#{/list}
+				</select>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'roba'}
+				<label id="robalbl" for="${field.id}">Roba</label>
+				<select name="${field.name}" id="${field.id}">
+					#{list items:robe, as:'roba'}
+						<option value="${roba.id}">${roba.naziv}</option>
+					#{/list}
+				</select>
+			#{/}
+			</p>
+			
+			<p>
+			#{field 'prometniDokument'}
+				<label id="robalbl" for="${field.id}">Prometni dokument</label>
+				<select name="${field.name}" id="${field.id}">
+					#{list items:dokumenti, as:'dokument'}
+						<option value="${dokument.id}">${dokument.redniBrojDokumenta}</option>
+					#{/list}
+				</select>
+			#{/}
+			</p>
+			
+			</div>
+			
+		</div>
+	
+		<!--  buttons  -->
+		<div class="buttons">
+			<input type="reset" value="Resetuj formu"/>
+			<button onclick="setFormAction('@{Stavkedokumenta.create()}')">Dodaj</button>
+			<button onclick="setFormAction('@{Stavkedokumenta.update()}')">Izmeni</button>
+			<button onclick="checkForDeletion('@{Stavkedokumenta.delete()}','ovu stavku?')">Obrisi</button>
+		</div>	
+	
+	</form>
+	
+	<a href="../../">Home</a>
+
+</body>
+</html>

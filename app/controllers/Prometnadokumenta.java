@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import helpers.MaxHelper;
+import helpers.PrometniDokumentiHelper;
 import models.Analitikamagacinskekartice;
 import models.Magacin;
 import models.Poslovnipartner;
@@ -21,45 +23,39 @@ public class Prometnadokumenta extends Controller{
 		List<Prometnidokument> dokumenti = Prometnidokument.findAll();
 		List<Magacin> magacini = Magacin.findAll();
 		List<Poslovnipartner> partneri = Poslovnipartner.findAll();
-	
+		
 		render(dokumenti, magacini, partneri);
 	}
 	
-	public static void create(String vrstaDokumenta, int redniBrojDokumenta, String datumFormiranja,
-			Character statusDokumenta, Long magacin, Long poslovniPartner){
-		
-		SimpleDateFormat parser = new SimpleDateFormat("dd-MM-yyyy");
+	public static void create(String vrstaDokumenta, Long magacin, Long poslovniPartner){
+		MaxHelper maxHelper = new MaxHelper();
+		SimpleDateFormat parser = new SimpleDateFormat("YYYY-MM-DD");
 		Magacin m = Magacin.findById(magacin);
 		Poslovnipartner pp = Poslovnipartner.findById(poslovniPartner);
-		Date datumFormiranjaDate = new Date();
+		Date datumKnjizenjaDate = new Date();
+		String statusDokumenta = "F";
 		
 		try {
-			datumFormiranjaDate = parser.parse(datumFormiranja);
+			datumKnjizenjaDate = parser.parse("1970-01-01");
 		} catch (ParseException e) {
 			e.printStackTrace();
 			read();
 		}
 		
-		Prometnidokument pd = new Prometnidokument(vrstaDokumenta, redniBrojDokumenta, datumFormiranjaDate,
-				null, statusDokumenta.charValue(), m, pp);
+		Prometnidokument pd = new Prometnidokument(vrstaDokumenta, maxHelper.getMaxPlusOneId("prometniDokument"), new Date(),
+				datumKnjizenjaDate, statusDokumenta.charAt(0), m, pp);
 		pd.save();
 		
 		read();
 	}
 
 	
-	public static void update(Long id, String vrstaDokumenta, Integer redniBrojDokumenta, String datumFormiranja, 
+	public static void update(Long id, Integer redniBrojDokumenta, String datumFormiranja, 
 			String datumKnjizenja, Character statusDokumenta, Long magacin, Long poslovniPartner){
 			
-			if(vrstaDokumenta.equals("Pr")){
-				
-			} else if(vrstaDokumenta.equals("Ot")){
-				
-			} else if(vrstaDokumenta.equals("Mm")){
-				
-			}
+			Prometnidokument pd = Prometnidokument.findById(id);
 		
-			SimpleDateFormat parser = new SimpleDateFormat("dd-MM-yyyy");
+			SimpleDateFormat parser = new SimpleDateFormat("YYYY-MM-DD");
 			Date datumFormiranjaDate = new Date();
 			Date datumKnjizenjaDate = new Date();
 			
@@ -71,12 +67,8 @@ public class Prometnadokumenta extends Controller{
 				read();
 			}
 		
-			Prometnidokument pd = Prometnidokument.findById(id);
-			pd.vrstaDokumenta = vrstaDokumenta;
-			pd.redniBrojDokumenta = Integer.parseInt(redniBrojDokumenta.toString());
 			pd.datumFormiranja = datumFormiranjaDate;
 			pd.datumKnjizenja = datumKnjizenjaDate;
-			pd.statusDokumenta = statusDokumenta.charValue();
 			pd.magacin = Magacin.findById(magacin);
 			pd.poslovniPartner = Poslovnipartner.findById(poslovniPartner);
 			
@@ -96,15 +88,12 @@ public class Prometnadokumenta extends Controller{
 		
 	}
 	
-	public static void readAll(Long docId) {
-		List<Prometnidokument> dokumenti = Prometnidokument.findAll();
-		List<Magacin> magacini = Magacin.findAll();
-		List<Poslovnipartner> partneri = Poslovnipartner.findAll();
-		List<Stavkadokumenta> stavke = Stavkadokumenta.find("byPrometniDokument", docId).fetch();
-		List<Roba> robe = Roba.findAll();
-		List<Analitikamagacinskekartice> analitike = Analitikamagacinskekartice.findAll();
+	public static void proknjizi(Long id){
 		
-		render(dokumenti, magacini, partneri, stavke, robe, analitike);
+	}
+	
+	public static void storniraj(){
+		
 	}
 	
 }
