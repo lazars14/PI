@@ -32,8 +32,6 @@ function sync(item){
     $("#robnaKartica").val(robnaKartica);
     $("#id").val(id);
     
-    alert(robnaKartica + " u sync metodi");
-    
     setKarticaSelected(robnaKartica);
 }
 
@@ -49,8 +47,8 @@ function setKarticaSelected(id){
 }
 
 function check(){
-	var text = document.getElementById("robnaKartica").textContent;
-	alert("id robne kartice pre submit-a: " + text);
+	var text = document.getElementById("robnaKartica").value;
+	document.getElementById("redniBroj").disabled = false;
 }
 
 </script>

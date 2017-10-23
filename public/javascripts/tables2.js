@@ -12,8 +12,7 @@ $(document).ready(function(){
 		  		$("#kartice .selected").removeClass("selected");
 		    	$(this).addClass("selected");
 		    	
-		    	$("#robnaKartica").html(this.children[12].textContent);
-		    	alert("id robne kartice u js-u: " + $("#robnaKartica").html());
+		    	document.getElementById("robnaKartica").value = this.children[12].textContent;
 		    }
 	  });
 });
